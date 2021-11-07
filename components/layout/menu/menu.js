@@ -7,7 +7,7 @@ function Menu(props) {
     const about = () => {
         alert('This is a Next.js based music library Application!\n' +
             'Based on the Team Rockstars IT Tech Case, but now statically generated!\n' +
-            'Made by Jan-Willem van Bremen - 2021');
+            'Made by Jan-Willem van Bremen - 2021')
     }
 
     const closeMenuIfMobile = () => {
