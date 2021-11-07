@@ -1,0 +1,27 @@
+{
+  "name": "rockstars_static",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "start-json-server": "json-server --watch json-server/db.json --port 3001",
+    "serve": "serve -s ./build -p 5000"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass": "^1.43.4"
+  },
+  "devDependencies": {
+    "@material-ui/core": "^4.12.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "autoprefixer": "^10.2.6",
+    "json-server": "^0.17.0",
+    "postcss": "^8.3.5",
+    "serve": "^13.0.2",
+    "tailwindcss": "^2.2.4"
+  }
+}
