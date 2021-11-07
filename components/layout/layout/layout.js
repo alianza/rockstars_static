@@ -24,7 +24,7 @@ export default function Layout({ children }) {
     const toggleTheme = () => { localStorageService.setKeyValue(darkThemeKey, !darkTheme); setDarkTheme(prevTheme => !prevTheme) }
 
     return (
-    <div id="app">
+    <div id="app" className="menu-active">
         <Head>
             <title>Team Rockstars IT - Tech Case</title>
             <link rel="icon" href="/favicon.ico"/>
