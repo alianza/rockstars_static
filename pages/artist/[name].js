@@ -5,7 +5,7 @@ import React from "react";
 import { useRouter } from "next/router";
 
 export async function getStaticProps({ params }) {
-    const songs = await MusicService.getSongsByArtistName(decodeURIComponent(params.name))
+    const songs = await MusicService.getSongsByArtistName(params.name)
 
     return {
         props: {
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
     const paths = artists.map(artist => {
         return {
             params: {
-                name: encodeURIComponent(artist.name)
+                name: artist.name
             }
         }
     })
