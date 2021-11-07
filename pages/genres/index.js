@@ -38,6 +38,13 @@ export default function Genres({ genres }) {
                     <h3>No results...</h3>}
                 {genres?.length > 50 && <ScrollToTopButton/>}
             </div>
+
+            <style jsx>{`
+                #genres:after {
+                    content: '';
+                    flex: auto;
+                    }
+                `}</style>
         </Layout>
     )
 }

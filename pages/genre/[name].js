@@ -18,7 +18,7 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
     const songs = await MusicService.getSongs()
 
-    const paths = songs.map(song => {
+    let paths = songs.map(song => {
         return {
             params: {
                 name: song.genre
@@ -27,13 +27,13 @@ export async function getStaticPaths() {
     })
 
     // filter out only unique paths
-    const uniquePaths = paths.filter((path, index, self) =>
+    paths = paths.filter((path, index, self) =>
         index === self.findIndex((t) => (
             t.params.name === path.params.name
         ))
     )
 
-    console.log(uniquePaths);
+    console.log(paths);
 
     return {
         paths,
