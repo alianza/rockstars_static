@@ -23,6 +23,7 @@
     "json-server": "^0.17.0",
     "postcss": "^8.3.5",
     "serve": "^13.0.2",
-    "tailwindcss": "^2.2.4"
+    "tailwindcss": "^2.2.4",
+    "concurrently": "^6.3.0"
   }
 }
