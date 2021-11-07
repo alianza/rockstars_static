@@ -1,6 +1,18 @@
 import React from "react";
 import Link from 'next/link'
 import Image from 'next/image'
+import PropTypes from 'prop-types';
+
+SongCard.propTypes = {
+    showArtist: PropTypes.bool,
+    song: PropTypes.shape({
+        name: PropTypes.string,
+        spotifyId: PropTypes.string,
+        album: PropTypes.string,
+        artist: PropTypes.string,
+        year: PropTypes.number,
+    })
+}
 
 function SongCard(props) {
     const spotifyUrl = `https://open.spotify.com/track/${props.song.spotifyId}`
