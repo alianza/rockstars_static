@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build-netlify": "concurrently \"yarn:start-json-server\" \"yarn:build\"",
+    "build-netlify": "concurrently \"yarn:start-json-server\" \"yarn:build\" --kill-others",
     "start": "next start",
     "start-json-server": "json-server --watch json-server/db.json --port 3001",
     "serve": "serve -s ./build -p 5000"
