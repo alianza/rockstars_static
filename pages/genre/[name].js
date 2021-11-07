@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton";
 
 export async function getStaticProps({ params }) {
-    const songs = await MusicService.getSongsByGenreName(params.name)
+    const songs = await MusicService.getSongsByGenreName(decodeURIComponent(params.name))
 
     return {
         props: {
@@ -21,7 +21,7 @@ export async function getStaticPaths() {
     let paths = songs.map(song => {
         return {
             params: {
-                name: song.genre
+                name: encodeURIComponent(song.genre)
             }
         }
     })
