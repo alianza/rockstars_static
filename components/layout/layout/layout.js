@@ -36,6 +36,7 @@ export default function Layout({ children }) {
             <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
             <meta name="theme-color" content="#ffffff"/>
             <link rel="manifest" href="/manifest.json"/>
+            <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet"/>
         </Head>
 
         <Header onMenuClick={toggleMenu} title={'Rockstars IT!'}/>

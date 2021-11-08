@@ -1,5 +1,3 @@
-@import url('//db.onlinewebfonts.com/c/e0fa406cbe458b32a7ea4e9a379b85fc?family=DIN+2014');
-
 @import 'styles/variables';
 @import 'styles/sizes';
 
@@ -25,7 +23,7 @@ a, button.link {
 }
 
 #app {
-  font-family: 'DIN 2014', sans-serif, Helvetica, Arial, sans-serif;
+  font-family: 'Abel', sans-serif, Helvetica, Arial, sans-serif;
   position: relative;
   min-height: 100vh;
   margin-top: calc(#{var(--header)} * -1);
