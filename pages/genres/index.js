@@ -34,7 +34,7 @@ export default function Genres({ genres }) {
                 </div>
                 {genres?.filter(genre => genre.toLowerCase().includes(query)).length ?
                     genres?.filter(genre => genre.toLowerCase().includes(query)).map(genre =>
-                        <GenreCard key={genre.name} genre={genre}/>) :
+                        <GenreCard key={genre} genre={genre}/>) :
                     <h3>No results...</h3>}
                 {genres?.length > 50 && <ScrollToTopButton/>}
             </div>

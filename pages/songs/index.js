@@ -34,7 +34,7 @@ function Songs({ songs }) {
 
                 {songs?.filter(song => song.name.toLowerCase().includes(query)).length ?
                     songs?.filter(song => song.name.toLowerCase().includes(query)).map(song =>
-                        <SongCard showArtist={true} key={song.id} song={song}/>) :
+                        <SongCard showArtist showGenre key={song.id} song={song}/>) :
                     <h3>No results...</h3>}
                 {songs?.length > 50 && <ScrollToTopButton/>}
             </div>
