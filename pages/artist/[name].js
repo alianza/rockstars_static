@@ -35,14 +35,12 @@ export default function artist({ songs }) {
     const router = useRouter()
 
     return (
-        <Layout>
-            <div id={'artist'} className={'flex flex-wrap justify-between gap-2'}>
-                <div className={'w-full'}>
-                    <h1 className={'mb-4'}>Artist: "{router.query.name}"</h1>
-                    <h2>{songs?.length} Song{songs?.length !== 1 && 's'}{songs?.length !== 0 && ':'}</h2>
-                </div>
-                {songs && songs.map(song => <SongCard key={song.id} song={song} showGenre/> )}
+        <div id={'artist'} className={'flex flex-wrap justify-between gap-2'}>
+            <div className={'w-full'}>
+                <h1 className={'mb-4'}>Artist: "{router.query.name}"</h1>
+                <h2>{songs?.length} Song{songs?.length !== 1 && 's'}{songs?.length !== 0 && ':'}</h2>
             </div>
-        </Layout>
+            {songs && songs.map(song => <SongCard key={song.id} song={song} showGenre/> )}
+        </div>
     )
 }

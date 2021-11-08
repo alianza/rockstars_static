@@ -44,22 +44,20 @@ export default function genre({ songs }) {
     const [query, setQuery] = useState('')
 
     return (
-        <Layout>
-            <div id={'genre'} className={'flex flex-wrap justify-between gap-2'}>
-                <div className={'flex justify-between flex-wrap gap-4 mb-4 w-full'}>
-                    <h1>Genre: "{router.query.name}"</h1>
-                    <input className={'p-2 text-rockstar-grey'} placeholder={'Search songs! 🎵'} onChange={event => setQuery(event.target.value?.toLowerCase())}/>
-                </div>
-                <div className={'w-full'}>
-                    <h2>{songs?.filter(song => song.name.toLowerCase().includes(query)).length} Song{songs?.filter(song => song.name.toLowerCase().includes(query)).length !== 1 && 's'}:
-                    </h2>
-                </div>
-                {songs?.filter(song => song.name.toLowerCase().includes(query)).length ?
-                    songs?.filter(song => song.name.toLowerCase().includes(query)).map(song =>
-                        <SongCard key={song.id} showArtist song={song}/>) :
-                    <h3>No results...</h3>}
-                {songs?.length > 50 && <ScrollToTopButton/>}
+        <div id={'genre'} className={'flex flex-wrap justify-between gap-2'}>
+            <div className={'flex justify-between flex-wrap gap-4 mb-4 w-full'}>
+                <h1>Genre: "{router.query.name}"</h1>
+                <input className={'p-2 text-rockstar-grey'} placeholder={'Search songs! 🎵'} onChange={event => setQuery(event.target.value?.toLowerCase())}/>
             </div>
-        </Layout>
+            <div className={'w-full'}>
+                <h2>{songs?.filter(song => song.name.toLowerCase().includes(query)).length} Song{songs?.filter(song => song.name.toLowerCase().includes(query)).length !== 1 && 's'}:
+                </h2>
+            </div>
+            {songs?.filter(song => song.name.toLowerCase().includes(query)).length ?
+                songs?.filter(song => song.name.toLowerCase().includes(query)).map(song =>
+                    <SongCard key={song.id} showArtist song={song}/>) :
+                <h3>No results...</h3>}
+            {songs?.length > 50 && <ScrollToTopButton/>}
+        </div>
     )
 }
