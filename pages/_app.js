@@ -9,10 +9,7 @@ function MyApp({Component, pageProps}) {
 
     useEffect(() => {
         let observer = new MutationObserver(mutations => {
-            mutations.forEach(mutation => {
-                mutation.target.dataset.theme === "dark" ? setDarkTheme(true) : setDarkTheme(false)
-                console.log(mutation.target.dataset.theme)
-            });
+            mutations.forEach(mutation => { mutation.target.dataset.theme === "dark" ? setDarkTheme(true) : setDarkTheme(false) });
         });
 
         observer.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
