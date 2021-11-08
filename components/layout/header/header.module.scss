@@ -1,0 +1,15 @@
+.header {
+    @apply h-header fixed w-full top-0 bg-secondary shadow-3xl ml-0 transition-spacing ease-in-out duration-500 z-[2];
+
+    .icon {
+        @apply p-[.3em] cursor-pointer inline-block transition-transform duration-200 hover:scale-110;
+
+        div {
+            @apply w-[35px] h-[5px] bg-primary my-[6px];
+        }
+    }
+
+    .title {
+        @apply inline m-0 leading-normal font-bold whitespace-nowrap;
+    }
+}

@@ -1,0 +1,19 @@
+.menu {
+    @apply fixed w-menu p-4 shadow-menu top-0 bg-primary h-full transition duration-500 ease-in-out transform -translate-x-menu z-10;
+
+    .close {
+        @apply inline-block cursor-pointer transition-transform duration-100 p-4 -m-4 transform hover:scale-125 active:scale-95 mobile:hidden;
+    }
+
+    .item {
+        @apply transition-transform duration-200 cursor-pointer hover:scale-110 active:scale-95 active:duration-100;
+
+        .active {
+            @apply underline;
+        }
+
+        .link {
+            @apply p-2 block;
+        }
+    }
+}

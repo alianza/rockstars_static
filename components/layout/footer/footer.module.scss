@@ -1,0 +1,8 @@
+.footer {
+    @apply flex gap-4 h-footer p-4 bg-rockstar-grey text-white shadow-3xl absolute bottom-0 left-0 right-0 transition-spacing ease-in-out duration-500;
+
+    .text {
+        @apply flex-grow;
+        flex-basis: 50%;
+    }
+}

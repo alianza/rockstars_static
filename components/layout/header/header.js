@@ -1,17 +1,16 @@
+import styles from './header.module.scss'
+
 function Header(props) {
 
     return (
-        <header className="header">
-            <div className="left">
-                <div onClick={e => props.onMenuClick(e)} className="menu-icon">
+        <header id="header" className={styles.header}>
+            <div className="flex text-primary">
+                <div onClick={e => props.onMenuClick(e)} className={styles.icon}>
                     <div/>
                     <div/>
                     <div/>
                 </div>
-                <h1 className="header-title">{props.title}</h1>
-            </div>
-            <div className="header-status">
-
+                <h1 className={styles.title}>{props.title}</h1>
             </div>
         </header>
     );

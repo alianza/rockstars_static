@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styles from './menu.module.scss'
 
 function Menu(props) {
     let router = useRouter()
@@ -17,17 +18,17 @@ function Menu(props) {
     }
 
     return (
-        <div className="menu">
-            <div onClick={e => props.onMenuClick(e)} className="menu-close">✖</div>
-            <h1>Menu</h1>
-            <ul className="menu-top" onClick={() => closeMenuIfMobile()}>
-                <li><Link href="/"><a className={router.pathname === "/" ? "active" : ""}>Artists</a></Link></li>
-                <li><Link href="/songs"><a className={router.pathname === "/songs" ? "active" : ""}>All Songs</a></Link></li>
-                <li><Link href="/genres"><a className={router.pathname === "/genres" ? "active" : ""}>All Genres</a></Link></li>
-                <li onClick={about}>About</li>
+        <nav id="menu" className={styles.menu}>
+            <div onClick={e => props.onMenuClick(e)} className={styles.close}>✖</div>
+            <h1 className="my-4">Menu</h1>
+            <ul onClick={() => closeMenuIfMobile()}>
+                <li className={styles.item}><Link href="/"><a className={`${router.pathname === "/" ? styles.active : ""} ${styles.link}`}>Artists</a></Link></li>
+                <li className={styles.item}><Link href="/songs"><a className={`${router.pathname === "/songs" ? styles.active : ""} ${styles.link}`}>All Songs</a></Link></li>
+                <li className={styles.item}><Link href="/genres"><a className={`${router.pathname === "/genres" ? styles.active : ""} ${styles.link}`}>All Genres</a></Link></li>
+                <li className={styles.item} onClick={about}><a className={styles.link}>About</a></li>
             </ul>
-            <p className="menu-bottom">Jan-Willem van Bremen</p>
-        </div>
+            <p className="bottom-8 absolute">Jan-Willem van Bremen</p>
+        </nav>
     );
 }
 

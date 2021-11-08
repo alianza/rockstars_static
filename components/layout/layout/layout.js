@@ -42,7 +42,7 @@ export default function Layout({ children }) {
 
         <Menu onMenuClick={toggleMenu}/>
 
-        <main className={'content'}>{children}</main>
+        <main id="content">{children}</main>
 
         <Footer darkTheme={darkTheme} onThemeButtonClick={toggleTheme}/>
 
