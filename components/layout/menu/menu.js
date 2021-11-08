@@ -25,7 +25,7 @@ export default function Menu(props) {
                 <li className={styles.item}><Link href="/"><a className={`${router.pathname === "/" ? styles.active : ""} ${styles.link}`}>Artists</a></Link></li>
                 <li className={styles.item}><Link href="/songs"><a className={`${router.pathname === "/songs" ? styles.active : ""} ${styles.link}`}>All Songs</a></Link></li>
                 <li className={styles.item}><Link href="/genres"><a className={`${router.pathname === "/genres" ? styles.active : ""} ${styles.link}`}>All Genres</a></Link></li>
-                <li className={styles.item} onClick={about}><a className={styles.link}>About</a></li>
+                <li className={styles.item} onClick={about}><button className={`${styles.link} link w-full text-left`}>About</button></li>
             </ul>
             <p className="bottom-8 absolute">Jan-Willem van Bremen</p>
         </nav>
