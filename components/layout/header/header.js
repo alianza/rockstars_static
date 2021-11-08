@@ -4,7 +4,7 @@ export default function Header(props) {
 
     return (
         <header id="header" className={styles.header}>
-            <div className="flex text-primary">
+            <div className="flex text-primary items-center">
                 <div onClick={e => props.onMenuClick(e)} className={styles.icon}>
                     <div/>
                     <div/>
