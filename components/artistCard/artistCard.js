@@ -4,7 +4,9 @@ import Link from "next/link";
 function ArtistCard(props) {
     return (
         <Link href={`/artist/${encodeURIComponent(props.artist.name)}`}>
-            <button className={'button text-secondary'}>{props.artist.name}</button>
+            <a>
+                <button className={'button text-secondary'}>{props.artist.name}</button>
+            </a>
         </Link>
     );
 }
