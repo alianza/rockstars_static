@@ -5,7 +5,7 @@ import React from "react";
 import { useRouter } from "next/router";
 
 export async function getStaticProps({ params }) {
-    const songs = await MusicService.getSongsByArtistName(params.name)
+    const songs = await MusicService.getSongsByArtistName(encodeURIComponent(params.name))
 
     return {
         props: {
@@ -41,7 +41,7 @@ export default function artist({ songs }) {
                     <h1 className={'mb-4'}>Artist: "{router.query.name}"</h1>
                     <h2>{songs?.length} Song{songs?.length !== 1 && 's'}{songs?.length !== 0 && ':'}</h2>
                 </div>
-                {songs && songs.map(song => <SongCard key={song.id} song={song}/> )}
+                {songs && songs.map(song => <SongCard key={song.id} song={song} showGenre/> )}
             </div>
         </Layout>
     )

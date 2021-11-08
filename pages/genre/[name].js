@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton";
 
 export async function getStaticProps({ params }) {
-    const songs = await MusicService.getSongsByGenreName(params.name)
+    const songs = await MusicService.getSongsByGenreName(encodeURIComponent(params.name))
 
     return {
         props: {
@@ -56,7 +56,7 @@ export default function genre({ songs }) {
                 </div>
                 {songs?.filter(song => song.name.toLowerCase().includes(query)).length ?
                     songs?.filter(song => song.name.toLowerCase().includes(query)).map(song =>
-                        <SongCard key={song.id} showArtist={true} song={song}/>) :
+                        <SongCard key={song.id} showArtist song={song}/>) :
                     <h3>No results...</h3>}
                 {songs?.length > 50 && <ScrollToTopButton/>}
             </div>
