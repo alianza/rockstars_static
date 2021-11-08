@@ -23,13 +23,31 @@ module.exports = {
       boxShadow: {
         'outline-yellow': '0 0 0 2px var(--rockstar-yellow)',
         'outline-grey': '0 0 0 2px var(--rockstar-grey)',
+        '3xl': '4px 0 6px rgba(0, 0, 0, 0.5)',
+        'menu': '0 0 5px rgba(0, 0, 0, 0.5);',
       },
       screens: {
-        'desktop': '900px',
-        'tablet': '600px',
-        'mobile': '480px',
-        'xs': '320px',
+        'desktop': '900px', //var(--desktop)
+        'tablet': '600px', //var(--tablet)
+        'mobile': '480px', // var(--mobile)
+        'xs': '320px', // var(--xs)
       },
+      spacing: {
+        'menu': 'var(--menu)',
+        'header': 'var(--header)',
+        'footer': 'var(--footer)',
+      },
+      transitionProperty: {
+        'spacing': 'margin, padding',
+      },
+      transitionTimingFunction: {
+        'ease-in-out': 'ease-in-out',
+      },
+      translate: {
+        'menu': 'var(--menu)',
+        'header': 'var(--header)',
+        'footer': 'var(--footer)',
+      }
     },
   },
   variants: {
