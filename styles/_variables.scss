@@ -1,4 +1,7 @@
 :root {
+
+    // Colors
+
     --rockstar-yellow: #ffe000;
     --rockstar-grey: #232323;
 
@@ -18,9 +21,23 @@
     --accent-7: #333333;
     --accent-8: #111111;
     --accent-9: #000;
+
+    // Sizes
+
+    --desktop: 900px;
+    --tablet: 600px;
+    --mobile: 480px;
+    --xs: 320px;
+
+    --menu: 11em;
+    --header: 3em;
+    --footer: 7em;
 }
 
 [data-theme='dark'] {
+
+    // Dark mode color overrides
+
     --primary: var(--rockstar-grey);
     --secondary: var(--rockstar-yellow);
 
