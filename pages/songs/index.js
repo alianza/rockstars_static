@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import Loader from "../../lib/loader";
+import React, { useState } from "react";
 import SongCard from "../../components/songCard/songCard";
 import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton";
 import MusicService from "../../lib/services/musicService";
-import Layout from "../../components/layout/layout/layout";
 
 export async function getStaticProps() {
     let songs = await MusicService.getSongs()
 
-    // Trim unneeded properties from songs
-    songs = songs.map(song => {
-        const { bpm, duration, shortname, ...trimmedSongs } = song;
+    songs = songs.map(song => { // Trim unneeded properties from songs
+        const { id, bpm, duration, shortname, ...trimmedSongs } = song;
         return trimmedSongs;
     });
 
@@ -24,6 +21,8 @@ export async function getStaticProps() {
 function Songs({ songs }) {
     const [query, setQuery] = useState('')
 
+    const filteredSongs = songs?.filter(song => song.name.toLowerCase().includes(query))
+
     return (
         <div id={'songs'} className={'flex flex-wrap justify-between gap-2'}>
             <div className={'flex justify-between flex-wrap gap-4 mb-4 w-full'}>
@@ -31,11 +30,11 @@ function Songs({ songs }) {
                 <input className={'p-2 text-rockstar-grey'} placeholder={'Search songs! 🎵'} onChange={event => setQuery(event.target.value?.toLowerCase())}/>
             </div>
 
-            {songs?.filter(song => song.name.toLowerCase().includes(query)).length ?
-                songs?.filter(song => song.name.toLowerCase().includes(query)).map(song =>
-                    <SongCard showArtist showGenre key={song.id} song={song}/>) :
+            {filteredSongs.length ?
+                filteredSongs.map(song =>
+                    <SongCard showArtist showGenre key={`${song.name} ${song.artist}`} song={song}/>) :
                 <h3>No results...</h3>}
-            {songs?.length > 50 && <ScrollToTopButton/>}
+            {filteredSongs?.length > 50 && <ScrollToTopButton/>}
         </div>
     );
 }

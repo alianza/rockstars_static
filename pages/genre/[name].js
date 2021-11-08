@@ -43,6 +43,8 @@ export default function genre({ songs }) {
     const router = useRouter()
     const [query, setQuery] = useState('')
 
+    const filteredSongs = songs?.filter(song => song.name.toLowerCase().includes(query))
+
     return (
         <div id={'genre'} className={'flex flex-wrap justify-between gap-2'}>
             <div className={'flex justify-between flex-wrap gap-4 mb-4 w-full'}>
@@ -50,14 +52,13 @@ export default function genre({ songs }) {
                 <input className={'p-2 text-rockstar-grey'} placeholder={'Search songs! 🎵'} onChange={event => setQuery(event.target.value?.toLowerCase())}/>
             </div>
             <div className={'w-full'}>
-                <h2>{songs?.filter(song => song.name.toLowerCase().includes(query)).length} Song{songs?.filter(song => song.name.toLowerCase().includes(query)).length !== 1 && 's'}:
-                </h2>
+                <h2>{filteredSongs.length} Song{filteredSongs.length !== 1 && 's'}:</h2>
             </div>
-            {songs?.filter(song => song.name.toLowerCase().includes(query)).length ?
-                songs?.filter(song => song.name.toLowerCase().includes(query)).map(song =>
+            {filteredSongs.length ?
+                filteredSongs.map(song =>
                     <SongCard key={song.id} showArtist song={song}/>) :
                 <h3>No results...</h3>}
-            {songs?.length > 50 && <ScrollToTopButton/>}
+            {filteredSongs?.length > 50 && <ScrollToTopButton/>}
         </div>
     )
 }
