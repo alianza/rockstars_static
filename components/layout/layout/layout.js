@@ -10,7 +10,6 @@ import { useEventListeners } from "../../../lib/eventListeners";
 const darkThemeKey = 'darkTheme';
 
 export default function Layout({ children }) {
-
     const [darkTheme, setDarkTheme] = useState(false)
 
     useEffect(() => { setDarkTheme(localStorageService.getValue(darkThemeKey)) })
