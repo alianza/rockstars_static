@@ -1,7 +1,7 @@
 @import url('//db.onlinewebfonts.com/c/e0fa406cbe458b32a7ea4e9a379b85fc?family=DIN+2014');
 
+@import 'styles/variables';
 @import 'styles/sizes';
-@import 'styles/colors';
 
 body {
   padding: 0;
@@ -28,44 +28,35 @@ a, button.link {
   font-family: 'DIN 2014', sans-serif, Helvetica, Arial, sans-serif;
   position: relative;
   min-height: 100vh;
-  margin-top: -$header-height;
-  padding-top: $header-height;
+  margin-top: calc(#{var(--header)} * -1);
+  padding-top: var(--header);
   background-color: var(--primary);
   transition: background-color .35s ease-in-out;
   box-sizing: content-box;
 
   @import "styles/buttons";
 
-  @import "components/header.scss";
-  @import "components/menu.scss";
-  @import 'components/loader.scss';
-  @import "components/footer.scss";
-
   &.menu-active {
-    & .header {
-      margin-left: $menu-size;
+    & #header {
+      margin-left: var(--menu);
     }
 
-    & .menu {
+    & #menu {
       transform: none;
     }
 
-    & .content {
-      margin-left: $menu-size;
+    & #content {
+      margin-left: var(--menu);
     }
 
-    & .footer {
-      margin-left: $menu-size;
-    }
-
-    & #loader {
-      padding-left: $menu-size;
+    & #footer {
+      margin-left: var(--menu);
     }
   }
 
-  & .content {
-    margin-top: $header-height;
-    transition: margin-left .5s;
+  & #content {
+    margin-top: var(--header);
+    transition: margin-left .5s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 1em 1em 8em;
   }
 
@@ -74,27 +65,13 @@ a, button.link {
 
 @media only screen and (max-width: $mobile_size) {
   #app {
-    & .menu {
-      &-close {
-        display: inline-block;
-      }
-    }
-
     &.menu-active {
-      & .content {
+      & #content {
         margin-left: 0;
       }
 
-      & .footer {
+      & #footer {
         margin-left: 0;
-      }
-    }
-
-    .button {
-      width: 100%;
-
-      &:hover {
-        transform: scale(1.05);
       }
     }
   }
