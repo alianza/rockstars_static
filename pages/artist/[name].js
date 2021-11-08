@@ -1,8 +1,7 @@
-import Layout from "../../components/layout/layout/layout";
-import MusicService from "../../lib/services/musicService";
-import SongCard from "../../components/songCard/songCard";
-import React from "react";
-import { useRouter } from "next/router";
+import MusicService from "../../lib/services/musicService"
+import SongCard from "../../components/songCard/songCard"
+import React from "react"
+import { useRouter } from "next/router"
 
 export async function getStaticProps({ params }) {
     const songs = await MusicService.getSongsByArtistName(encodeURIComponent(params.name))

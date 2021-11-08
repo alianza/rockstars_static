@@ -1,9 +1,8 @@
-import Layout from "../../components/layout/layout/layout";
-import MusicService from "../../lib/services/musicService";
-import SongCard from "../../components/songCard/songCard";
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton";
+import MusicService from "../../lib/services/musicService"
+import SongCard from "../../components/songCard/songCard"
+import React, { useState } from "react"
+import { useRouter } from "next/router"
+import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton"
 
 export async function getStaticProps({ params }) {
     const songs = await MusicService.getSongsByGenreName(encodeURIComponent(params.name))

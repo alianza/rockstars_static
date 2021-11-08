@@ -1,5 +1,4 @@
-import Layout from "../components/layout/layout/layout";
-import Link from "next/link";
+import Link from "next/link"
 
 export default function NotFound() {
     return (
@@ -8,5 +7,5 @@ export default function NotFound() {
             <h2>Page not found!</h2>
             <span>Go back <b><Link href={'/'}><a>Home</a></Link></b>.</span>
         </div>
-    );
+    )
 }

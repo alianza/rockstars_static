@@ -1,6 +1,6 @@
 import styles from './header.module.scss'
 
-function Header(props) {
+export default function Header(props) {
 
     return (
         <header id="header" className={styles.header}>
@@ -13,7 +13,5 @@ function Header(props) {
                 <h1 className={styles.title}>{props.title}</h1>
             </div>
         </header>
-    );
+    )
 }
-
-export default Header;

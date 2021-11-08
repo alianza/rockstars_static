@@ -1,8 +1,8 @@
-import React from "react";
+import React from "react"
 import Link from 'next/link'
 import Image from 'next/image'
-import PropTypes from 'prop-types';
-import encodeURICustom from "../../lib/encodeURLs";
+import PropTypes from 'prop-types'
+import encodeURICustom from "../../lib/encodeURLs"
 
 SongCard.propTypes = {
     showArtist: PropTypes.bool,
@@ -16,7 +16,7 @@ SongCard.propTypes = {
     })
 }
 
-function SongCard(props) {
+export default function SongCard(props) {
     const spotifyUrl = `https://open.spotify.com/track/${props.song.spotifyId}`
 
     return (
@@ -37,7 +37,5 @@ function SongCard(props) {
                 />
             </a>
         </div>
-    );
+    )
 }
-
-export default SongCard;

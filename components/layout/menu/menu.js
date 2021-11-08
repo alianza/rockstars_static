@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Link from "next/link"
+import { useRouter } from "next/router"
 import styles from './menu.module.scss'
 
-function Menu(props) {
+export default function Menu(props) {
     let router = useRouter()
 
     const about = () => {
@@ -29,7 +29,5 @@ function Menu(props) {
             </ul>
             <p className="bottom-8 absolute">Jan-Willem van Bremen</p>
         </nav>
-    );
+    )
 }
-
-export default Menu;

@@ -1,10 +1,10 @@
-import scrollToTop from "../../lib/scrollToTop";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import React, { useEffect, useState } from "react";
+import scrollToTop from "../../lib/scrollToTop"
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward"
+import React, { useEffect, useState } from "react"
 
-function ScrollToTopButton() {
+export default function ScrollToTopButton() {
     const [showButton, setShowButton] = useState(false)
-    const requiredScrollAmount = 1000;
+    const requiredScrollAmount = 1000
 
     useEffect(() => {
         window.addEventListener('scroll', onScroll)
@@ -24,5 +24,3 @@ function ScrollToTopButton() {
         </button>
     )
 }
-
-export default ScrollToTopButton;

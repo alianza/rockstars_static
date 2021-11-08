@@ -1,8 +1,7 @@
-import Layout from "../components/layout/layout/layout";
-import MusicService from "../lib/services/musicService";
-import ArtistCard from "../components/artistCard/artistCard";
-import ScrollToTopButton from "../components/scrollToTopButton/scrollToTopButton";
-import React, { useState } from "react";
+import MusicService from "../lib/services/musicService"
+import ArtistCard from "../components/artistCard/artistCard"
+import ScrollToTopButton from "../components/scrollToTopButton/scrollToTopButton"
+import React, { useState } from "react"
 
 export async function getStaticProps() {
     const artists = await MusicService.getArtists()

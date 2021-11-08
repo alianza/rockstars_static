@@ -1,13 +1,13 @@
-import Head from "next/head";
-import Header from "../header/header";
-import Menu from "../menu/menu";
-import Footer from "../footer/footer";
-import { useEffect, useState } from "react";
-import localStorageService from "../../../lib/services/localStorageService";
-import useTheme from "../../../lib/theme";
-import { useEventListeners } from "../../../lib/eventListeners";
+import Head from "next/head"
+import Header from "../header/header"
+import Menu from "../menu/menu"
+import Footer from "../footer/footer"
+import { useEffect, useState } from "react"
+import localStorageService from "../../../lib/services/localStorageService"
+import useTheme from "../../../lib/theme"
+import { useEventListeners } from "../../../lib/eventListeners"
 
-const darkThemeKey = 'darkTheme';
+const darkThemeKey = 'darkTheme'
 
 export default function Layout({ children }) {
     const [darkTheme, setDarkTheme] = useState(false)

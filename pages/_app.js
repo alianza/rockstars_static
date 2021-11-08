@@ -1,10 +1,10 @@
 import '../styles/tailwind.css'
 import '../styles/global.scss'
-import NextNProgress from "nextjs-progressbar";
-import { useEffect, useState } from "react";
-import Layout from "../components/layout/layout/layout";
+import NextNProgress from "nextjs-progressbar"
+import { useEffect, useState } from "react"
+import Layout from "../components/layout/layout/layout"
 
-function MyApp({Component, pageProps}) {
+export default function MyApp({Component, pageProps}) {
     const [darkTheme, setDarkTheme] = useState(false)
 
     useEffect(() => {
@@ -12,11 +12,9 @@ function MyApp({Component, pageProps}) {
             mutations.forEach(mutation => { mutation.target.dataset.theme === "dark" ? setDarkTheme(true) : setDarkTheme(false) });
         });
 
-        observer.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
+        observer.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] })
 
-        return () => {
-            observer.disconnect()
-        };
+        return () => { observer.disconnect() }
     }, [])
 
     return (
@@ -25,5 +23,3 @@ function MyApp({Component, pageProps}) {
         <Component {...pageProps} />
     </Layout>)
 }
-
-export default MyApp

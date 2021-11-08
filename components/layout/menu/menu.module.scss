@@ -9,7 +9,7 @@
         @apply transition-transform duration-200 cursor-pointer hover:scale-110 active:scale-95 active:duration-100;
 
         .active {
-            @apply underline;
+            @apply underline font-bold;
         }
 
         .link {

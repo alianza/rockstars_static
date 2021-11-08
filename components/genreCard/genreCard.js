@@ -1,6 +1,6 @@
-import Link from "next/link";
-import React from "react";
-import encodeURICustom from "../../lib/encodeURLs";
+import Link from "next/link"
+import React from "react"
+import encodeURICustom from "../../lib/encodeURLs"
 
 export default function GenreCard(genre) {
     return (
