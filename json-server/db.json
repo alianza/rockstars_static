@@ -15855,7 +15855,7 @@
 		"id": 2283,
 		"name": "My Own Eyes",
 		"year": 2014,
-		"artist": "\"Weird Al\" Yankovic",
+		"artist": "Weird Al Yankovic",
 		"shortname": "myowneyes",
 		"bpm": 152,
 		"duration": 225834,
@@ -27680,7 +27680,7 @@
 ],
 "artists": [{
     "id": 760,
-    "name": "\"Weird Al\" Yankovic"
+    "name": "Weird Al Yankovic"
 }, {
     "id": 3,
     "name": ".38 Special"
