@@ -9,7 +9,7 @@ export default function ScrollToTopButton() {
     useEffect(() => {
         window.addEventListener('scroll', onScroll)
 
-        return function cleanup () {
+        return () => {
             window.removeEventListener('scroll', onScroll)
         }
     }, [])
@@ -19,7 +19,7 @@ export default function ScrollToTopButton() {
     }
 
     return (
-        <button className={`button inverted ${showButton ? '' : 'hidden'} fixed top-16 right-4 z-10`} aria-label="Back to the top" onClick={scrollToTop}>
+        <button className={`button inverted${showButton ? '' : ' hidden'} fixed top-16 scale-90 mobile:scale-x-100 left-0 mobile:left-[initial] mobile:right-4 z-10 shadow-3xl`} aria-label="Back to the top" onClick={scrollToTop}>
             <ArrowUpwardIcon/>
         </button>
     )
