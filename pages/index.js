@@ -38,7 +38,7 @@ export default function Home({artists}) {
                 ) :
                 <h3>No results...</h3>}
             {filteredArtists?.length >= 50 && <ScrollToTopButton/>}
-            {filteredArtists?.length >= 150 && <LoadMoreButton amount={2}/>}
+            {filteredArtists?.length >= 150 && <LoadMoreButton amount={150}/>}
         </div>
     )
 }
