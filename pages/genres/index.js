@@ -22,7 +22,7 @@ export default function Genres({ genres }) {
     const filteredGenres = genres?.filter(genre => genre.toLowerCase().includes(query))
 
     return (
-        <div id={'genres'} className={'flex flex-wrap justify-between gap-y-2'}>
+        <div id={'genres'} className={'flex flex-wrap justify-between gap-y-2 gap-x-px'}>
             <div className={'flex justify-between flex-wrap gap-4 mb-4 w-full'}>
                 <h1>All Genres</h1>
                 <input className={'p-2 text-rockstar-grey w-full mobile:w-auto'} placeholder={'Search genres! 🎵'}

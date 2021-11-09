@@ -19,10 +19,11 @@ export default function Home({artists}) {
     const filteredArtists = artists?.filter(artist => artist.name.toLowerCase().includes(query))
 
     return (
-        <div id={'artists'} className={'flex flex-wrap justify-between gap-2'}>
+        <div id={'artists'} className={'flex flex-wrap justify-between gap-y-2 gap-x-px'}>
             <div className={'flex justify-between flex-wrap gap-4 mb-4 w-full'}>
                 <h1>All Artists</h1>
-                <input className={'p-2 text-rockstar-grey'} placeholder={'Search artists! 👨‍🎤'} onChange={event => setQuery(event.target.value?.toLowerCase())}/>
+                <input className={'p-2 text-rockstar-grey w-full mobile:w-auto'} placeholder={'Search artists! 👨‍🎤'}
+                       onChange={event => setQuery(event.target.value?.toLowerCase())}/>
             </div>
 
             {filteredArtists?.length ?
