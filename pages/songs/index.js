@@ -3,7 +3,7 @@ import SongCard from "../../components/songCard/songCard"
 import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton"
 import MusicService from "../../lib/services/musicService"
 import { compress, decompress } from 'compress-json'
-import LoadMoreButton from "../../lib/loadMoreButton"
+import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton.js"
 
 export async function getStaticProps() {
     let songs = await MusicService.getSongs()
