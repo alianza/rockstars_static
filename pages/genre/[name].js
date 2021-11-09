@@ -7,7 +7,7 @@ import SOrNot from "../../components/sOrNot"
 import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton"
 
 export async function getStaticProps({ params }) {
-    const songs = await MusicService.getSongsByGenreName(encodeURIComponent(params.name))
+    const songs = await MusicService.getSongsByGenreName(params.name)
 
     return {
         props: {
