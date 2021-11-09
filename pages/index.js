@@ -5,7 +5,12 @@ import React, { useState } from "react"
 import LoadMoreButton from "../components/loadMoreButton/loadMoreButton"
 
 export async function getStaticProps() {
-    const artists = await MusicService.getArtists()
+    let artists = await MusicService.getArtists()
+
+    artists = artists.map(artist => { // Trim unneeded properties from artists
+        const { id, ...trimmedArtists } = artist
+        return trimmedArtists
+    })
 
     return {
         props: {
