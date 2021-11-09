@@ -4,9 +4,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build-netlify": "npm-run-all --parallel --race build start-json-server",
+    "build-netlify": "npm-run-all --parallel --race build start-json-server-quietly",
     "start": "next start",
-    "start-json-server": "json-server --watch json-server/db.json --port 3001"
+    "start-json-server": "json-server --watch json-server/db.json --port 3001",
+    "start-json-server-quietly": "json-server --watch json-server/db.json --port 3001 --quiet"
   },
   "dependencies": {
     "compress-json": "^2.0.1",
