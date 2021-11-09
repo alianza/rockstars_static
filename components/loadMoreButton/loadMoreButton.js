@@ -1,7 +1,8 @@
 import PropTypes from "prop-types"
 
 LoadMoreButton.propTypes = {
-    fullWidth: PropTypes.bool
+    fullWidth: PropTypes.bool,
+    amount: PropTypes.number
 }
 
 export default function LoadMoreButton(props) {
@@ -10,7 +11,7 @@ export default function LoadMoreButton(props) {
     return (
         <button className={`button yellow shadow-3xl ${props.fullWidth ? 'w-full' : ''}`}
                 onClick={() => document.querySelectorAll(selectors)
-                    .forEach((e, i) => i < 50 ? e.classList.remove('hidden') : '')}>
+                    .forEach((e, i) => i < (props?.amount || 50) ? e.classList.remove('hidden') : '')}>
             <strong className="text-xl">Load more...</strong>
         </button>
     )
