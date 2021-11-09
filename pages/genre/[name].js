@@ -3,6 +3,8 @@ import SongCard from "../../components/songCard/songCard"
 import React, { useState } from "react"
 import { useRouter } from "next/router"
 import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton"
+import SOrNot from "../../components/sOrNot"
+import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton"
 
 export async function getStaticProps({ params }) {
     const songs = await MusicService.getSongsByGenreName(encodeURIComponent(params.name))
@@ -45,20 +47,21 @@ export default function genre({ songs }) {
     const filteredSongs = songs?.filter(song => song.name.toLowerCase().includes(query))
 
     return (
-        <div id={'genre'} className={'flex flex-wrap justify-between gap-2'}>
-            <div className={'flex justify-between flex-wrap gap-4 mb-4 w-full'}>
+        <div id="genre" className="flex flex-wrap justify-between gap-2">
+            <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
                 <h1>Genre: "{router.query.name}"</h1>
-                <input className={'p-2 text-rockstar-grey  w-full mobile:w-auto'} placeholder={'Search songs! 🎵'}
+                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵"
                        onChange={event => setQuery(event.target.value?.toLowerCase())}/>
             </div>
-            <div className={'w-full'}>
-                <h2>{filteredSongs.length} Song{filteredSongs.length !== 1 && 's'}:</h2>
+            <div className="w-full">
+                <h2>{filteredSongs?.length} Song<SOrNot arrayLength={filteredSongs?.length} withColon /></h2>
             </div>
             {filteredSongs.length ?
-                filteredSongs.map(song =>
-                    <SongCard key={song.id} showArtist song={song}/>) :
+                filteredSongs.map((song, index) =>
+                    <SongCard showArtist key={song.id} song={song} hidden={index >= 50}/>) :
                 <h3>No results...</h3>}
             {filteredSongs?.length > 50 && <ScrollToTopButton/>}
+            {filteredSongs?.length > 50 && <LoadMoreButton fullWidth/>}
         </div>
     )
 }

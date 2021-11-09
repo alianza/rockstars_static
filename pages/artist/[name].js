@@ -44,7 +44,7 @@ export default function artist({ songs }) {
                 <h1 className="mb-4">Artist: "{router.query.name}"</h1>
                 <span className="text-xl block">{albums.length} Album<SOrNot arrayLength={albums.length}/></span>
                 <span className="text-xl block">{newest.year} - {oldest.year}</span>
-                <h2>{songs?.length} Song<SOrNot arrayLength={songs?.length} withColon/></h2>
+                <h2>{songs?.length} Song<SOrNot arrayLength={songs?.length} withColon /></h2>
             </div>
             {songs && songs.map(song => <SongCard key={song.id} song={song} showGenre/>)}
         </div>
