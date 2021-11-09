@@ -1,5 +1,5 @@
 .button {
-    transition: background-color .2s, color .2s, transform .1s, text-decoration-color .1s;
+    transition: background-color .2s, color .2s, transform .3s, text-decoration-color .2s;
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -24,27 +24,12 @@
     }
 
     &:hover {
+        transition: background-color .2s, color .2s, transform .1s, text-decoration-color .3s;
         transform: scale(1.05);
     }
 
     &:active {
         transform: scale(.98);
-    }
-}
-
-.svgButton {
-    transition: transform .2s ease-in-out;
-    width: 1.5em;
-    height: 1.5em;
-
-    &:hover {
-        cursor: pointer;
-        transition: transform .1s ease-in-out;
-        transform: scale(1.1);
-    }
-
-    &:active {
-        transform: scale(.95);
     }
 }
 
