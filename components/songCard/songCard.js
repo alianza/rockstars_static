@@ -29,8 +29,8 @@ export default function SongCard(props) {
             <a className={'absolute w-[100px] bottom-0 right-0 mobile:top-0 mobile:bottom-auto '} href={spotifyUrl} target={'_blank'} rel={'noreferrer'}>
                 <Image
                     layout={'responsive'}
-                    width={1200}
-                    height={494}
+                    width={100}
+                    height={41}
                     src="/assets/spotify.png"
                     alt={'Listen on Spotify!'}
                     className={'transition-transform hover:scale-105'}
