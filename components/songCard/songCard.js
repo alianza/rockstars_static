@@ -20,7 +20,7 @@ export default function SongCard(props) {
     const spotifyUrl = `https://open.spotify.com/track/${props.song.spotifyId}`
 
     return (
-        <div id="songCard" className={'relative bg-secondary p-4 w-full desktop:w-[calc(50%-.25em)]'}>
+        <div id="songCard" className={`relative bg-secondary p-4 w-full desktop:w-[calc(50%-.25em)] ${props.hidden ? 'hidden' : ''}`}>
             <span className={'text-primary block mobile:mr-20'}>Title: <b>{props.song.name}</b></span>
             <span className={'text-primary block'}>Album: <b>{props.song.album}</b></span>
             {props.showArtist && <span className={'text-primary block'}>Artist: <Link href={`/artist/${encodeURICustom(props.song.artist)}`}><a><b>{props.song.artist}</b></a></Link></span> }

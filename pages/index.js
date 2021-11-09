@@ -2,6 +2,7 @@ import MusicService from "../lib/services/musicService"
 import ArtistCard from "../components/artistCard/artistCard"
 import ScrollToTopButton from "../components/scrollToTopButton/scrollToTopButton"
 import React, { useState } from "react"
+import LoadMoreButton from "../lib/loadMoreButton"
 
 export async function getStaticProps() {
     const artists = await MusicService.getArtists()
@@ -27,17 +28,12 @@ export default function Home({artists}) {
             </div>
 
             {filteredArtists?.length ?
-                filteredArtists.map(artist =>
-                    <ArtistCard key={artist.id} artist={artist}/>) :
+                filteredArtists.map((artist, index) =>
+                    <ArtistCard key={artist.id} artist={artist} hidden={index >= 150}/>
+                ) :
                 <h3>No results...</h3>}
-            {filteredArtists?.length > 50 && <ScrollToTopButton/>}
-
-            <style jsx>{`
-            #artists:after {
-                content: '';
-                flex: auto;
-                }
-            `}</style>
+            {filteredArtists?.length >= 50 && <ScrollToTopButton/>}
+            {filteredArtists?.length >= 150 && <LoadMoreButton/>}
         </div>
     )
 }

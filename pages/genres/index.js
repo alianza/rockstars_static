@@ -2,6 +2,7 @@ import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopBut
 import React, { useState } from "react"
 import MusicService from "../../lib/services/musicService"
 import GenreCard from "../../components/genreCard/genreCard"
+import LoadMoreButton from "../../lib/loadMoreButton"
 
 export async function getStaticProps() {
     const songs = await MusicService.getSongs()
@@ -33,10 +34,11 @@ export default function Genres({ genres }) {
                 </h2>
             </div>
             {filteredGenres.length ?
-                filteredGenres.map(genre =>
-                    <GenreCard key={genre} genre={genre}/>) :
+                filteredGenres.map((genre, index) =>
+                    <GenreCard key={genre} genre={genre} hidden={index >= 150}/>) :
                 <h3>No results...</h3>}
-            {filteredGenres?.length > 50 && <ScrollToTopButton/>}
+            {filteredGenres?.length >= 50 && <ScrollToTopButton/>}
+            {filteredGenres?.length >= 50 && <LoadMoreButton/>}
         </div>
     )
 }

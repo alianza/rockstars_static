@@ -3,6 +3,7 @@ import SongCard from "../../components/songCard/songCard"
 import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton"
 import MusicService from "../../lib/services/musicService"
 import { compress, decompress } from 'compress-json'
+import LoadMoreButton from "../../lib/loadMoreButton"
 
 export async function getStaticProps() {
     let songs = await MusicService.getSongs()
@@ -37,10 +38,11 @@ export default function Songs({songs}) {
             </div>
 
             {filteredSongs.length ?
-                filteredSongs.map(song =>
-                    <SongCard showArtist showGenre key={`${song.name} ${song.artist}`} song={song}/>) :
+                filteredSongs.map((song, index) =>
+                    <SongCard showArtist showGenre key={`${song.name} ${song.artist}`} song={song} hidden={index >= 50}/>) :
                 <h3>No results...</h3>}
-            {filteredSongs?.length > 50 && <ScrollToTopButton/>}
+            {filteredSongs?.length >= 50 && <ScrollToTopButton/>}
+            {filteredSongs?.length >= 50 && <LoadMoreButton fullWidth/>}
         </div>
     )
 }
