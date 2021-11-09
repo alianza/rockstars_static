@@ -32,7 +32,7 @@ export default function Songs({songs}) {
         <div id={'songs'} className={'flex flex-wrap justify-between gap-2'}>
             <div className={'flex justify-between flex-wrap gap-4 mb-4 w-full'}>
                 <h1>All Songs</h1>
-                <input className={'p-2 text-rockstar-grey'} placeholder={'Search songs! 🎵'}
+                <input className={'p-2 text-rockstar-grey  w-full mobile:w-auto'} placeholder={'Search songs! 🎵'}
                        onChange={event => setQuery(event.target.value?.toLowerCase())}/>
             </div>
 
