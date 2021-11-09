@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import SOrNot from "../../components/sOrNot"
 
 export async function getStaticProps({ params }) {
-    const songs = await MusicService.getSongsByArtistName(params.name)
+    const songs = await MusicService.getSongsByArtistName(encodeURIComponent(params.name))
 
     return {
         props: {
