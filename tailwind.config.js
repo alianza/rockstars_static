@@ -23,7 +23,7 @@ module.exports = {
       boxShadow: {
         'outline-yellow': '0 0 0 2px var(--rockstar-yellow)',
         'outline-grey': '0 0 0 2px var(--rockstar-grey)',
-        '3xl': '4px 0 6px rgba(0, 0, 0, 0.5)',
+        '3xl': '0 0 6px rgba(0, 0, 0, 0.5)',
         'menu': '0 0 5px rgba(0, 0, 0, 0.5);',
       },
       screens: {
