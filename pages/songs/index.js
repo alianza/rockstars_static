@@ -37,9 +37,8 @@ export default function Songs({songs}) {
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredSongs([...filteredSongs]?.reverse())}>Sort ⇕</button>
                 </div>
                 <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵"
-                       onChange={e => { triggerLoader(router)
-                           setFilteredSongs(songs?.filter(song => { return Object.values(song).some(value => {
-                                   return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())})}))}}/>
+                       onChange={e => { triggerLoader(router); setFilteredSongs(songs?.filter(song => {
+                           return Object.values(song).some(value => { return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())})}))}}/>
             </div>
 
             {filteredSongs.length ? filteredSongs.map((song, index) =>

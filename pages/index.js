@@ -21,7 +21,7 @@ export async function getStaticProps() {
     }
 }
 
-export default function Home({artists}) {
+export default function Home({ artists }) {
     const router = useRouter()
     const [filteredArtists, setFilteredArtists] = useState(artists)
 
@@ -33,10 +33,8 @@ export default function Home({artists}) {
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredArtists([...filteredArtists]?.reverse())}>Sort ⇕</button>
                 </div>
                 <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search artists! 👨‍🎤"
-                       onChange={e => { triggerLoader(router)
-                           setFilteredArtists(artists?.filter(artist => {
-                           return Object.values(artist).some(value => {
-                               return value.toString().toLowerCase().includes(e.target.value.toLowerCase())})}))}}/>
+                       onChange={e => { triggerLoader(router); setFilteredArtists(artists?.filter(artist => {
+                               return artist.name.toLowerCase().includes(e.target.value?.toLowerCase())}))}}/>
             </div>
 
             {filteredArtists?.length ? filteredArtists.map((artist, index) =>
