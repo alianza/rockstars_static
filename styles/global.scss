@@ -6,6 +6,22 @@ body {
   margin: 0;
   overflow-x: hidden;
   color: var(--text-primary);
+
+  #nprogress {
+    .spinner {
+      top: 0;
+      right: 0;
+      padding: 15px;
+      background-color: var(--secondary);
+      pointer-events: auto;
+
+      .spinner-icon {
+        border-width: 9px;
+        animation-duration: 750ms;
+        animation-timing-function: ease-in-out;
+      }
+    }
+  }
 }
 
 a, button.link {

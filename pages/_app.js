@@ -19,7 +19,7 @@ export default function MyApp({Component, pageProps}) {
 
     return (
     <Layout>
-        <NextNProgress color={darkTheme ? '#232323' : '#ffe000'}/>
+        <NextNProgress color={darkTheme ? '#232323' : '#ffe000'} stopDelayMs={500}/>
         <Component {...pageProps} />
     </Layout>)
 }
