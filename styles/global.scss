@@ -8,11 +8,14 @@ body {
   color: var(--text-primary);
 
   #nprogress {
+    position: relative;
+    z-index: 9999999;
+
     .spinner {
       top: 0;
       right: 0;
       padding: 15px;
-      background-color: var(--secondary);
+      background-color: var(--primary);
       pointer-events: auto;
 
       .spinner-icon {
