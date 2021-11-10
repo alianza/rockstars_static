@@ -22,7 +22,7 @@ export async function getStaticPaths() {
     let paths = songs.map(song => {
         return {
             params: {
-                name: decodeURI(song.genre)
+                name: encodeURI(song.genre)
             }
         }
     })
