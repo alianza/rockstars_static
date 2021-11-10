@@ -20,7 +20,7 @@ export async function getStaticPaths() {
     const paths = artists.map(artist => {
         return {
             params: {
-                name: artist.name
+                name: decodeURI(artist.name)
             }
         }
     })
