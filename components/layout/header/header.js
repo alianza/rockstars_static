@@ -1,4 +1,6 @@
 import styles from './header.module.scss'
+import Image from "next/image"
+import React from "react"
 
 export default function Header(props) {
 
@@ -12,6 +14,15 @@ export default function Header(props) {
                 </div>
                 <h1 className={styles.title}>{props.title}</h1>
             </div>
+            <a href="https://teamrockstars.nl/" className="transition-transform hover:scale-110 active:scale-100">
+                <Image
+                    src="/assets/logo.png"
+                    alt="Team Rockstars IT Logo"
+                    className="top-0 right-0"
+                    width={48}
+                    height={48}
+                />
+            </a>
         </header>
     )
 }

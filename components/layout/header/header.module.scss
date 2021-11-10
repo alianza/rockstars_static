@@ -1,5 +1,5 @@
 .header {
-    @apply h-header fixed w-full top-0 bg-secondary shadow-3xl ml-0 transition-spacing ease-in-out duration-500 z-[2];
+    @apply flex justify-between h-header fixed w-full top-0 bg-secondary shadow-3xl ml-0 transition-spacing ease-in-out duration-500 z-[2];
 
     .icon {
         @apply p-[.3em] cursor-pointer inline-block transition-transform duration-200 hover:scale-110;
