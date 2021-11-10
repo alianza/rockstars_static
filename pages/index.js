@@ -34,7 +34,7 @@ export default function Home({artists}) {
 
             {filteredArtists?.length ?
                 filteredArtists.map((artist, index) =>
-                    <ArtistCard key={artist.id} artist={artist} hidden={index >= 150}/>
+                    <ArtistCard key={artist.name} artist={artist} hidden={index >= 150}/>
                 ) :
                 <h3>No results...</h3>}
             {filteredArtists?.length >= 50 && <ScrollToTopButton/>}
