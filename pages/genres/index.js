@@ -3,6 +3,8 @@ import React, { useState } from "react"
 import MusicService from "../../lib/services/musicService"
 import GenreCard from "../../components/genreCard/genreCard"
 import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton.js"
+import triggerLoader from "../../lib/triggerLoader"
+import { useRouter } from "next/router"
 
 export async function getStaticProps() {
     const songs = await MusicService.getSongs()
@@ -18,6 +20,7 @@ export async function getStaticProps() {
 }
 
 export default function Genres({ genres }) {
+    const router = useRouter()
     const [filteredGenres, setFilteredGenres] = useState(genres)
 
     return (
@@ -28,7 +31,9 @@ export default function Genres({ genres }) {
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredGenres([...filteredGenres]?.reverse())}>Sort ⇕</button>
                 </div>
                 <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search genres! 🎵"
-                       onChange={e => setFilteredGenres(genres?.filter(genre => genre.toLowerCase().includes(e.target.value?.toLowerCase())))}/>
+                       onChange={e => { triggerLoader(router)
+                           setFilteredGenres(genres?.filter(genre => {
+                               genre.toLowerCase().includes(e.target.value?.toLowerCase())}))}}/>
             </div>
             <div className="w-full">
                 <h2>{filteredGenres.length} Genre{filteredGenres.length !== 1 && 's'}</h2>

@@ -5,6 +5,7 @@ import { useRouter } from "next/router"
 import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton"
 import SOrNot from "../../components/sOrNot"
 import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton"
+import triggerLoader from "../../lib/triggerLoader"
 
 export async function getStaticProps({ params }) {
     let songs = await MusicService.getSongsByGenreName(encodeURIComponent(params.name))
@@ -57,9 +58,9 @@ export default function genre({ songs }) {
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredSongs([...filteredSongs]?.reverse())}>Sort ⇕</button>
                 </div>
                 <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵"
-                       onChange={e => setFilteredSongs(songs?.filter(song => {
-                           return Object.values(song).some(value => {
-                               return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())})}))}/>
+                       onChange={e => { triggerLoader(router)
+                           setFilteredSongs(songs?.filter(song => { return Object.values(song).some(value => {
+                                   return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())})}))}}/>
             </div>
             <div className="w-full">
                 <h2>{filteredSongs?.length} Song<SOrNot arrayLength={filteredSongs?.length} withColon /></h2>

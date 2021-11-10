@@ -5,6 +5,7 @@ import { useRouter } from "next/router"
 import SOrNot from "../../components/sOrNot"
 import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton"
 import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton"
+import triggerLoader from "../../lib/triggerLoader"
 
 export async function getStaticProps({ params }) {
     const songs = await MusicService.getSongsByArtistName(encodeURIComponent(params.name))
@@ -46,9 +47,9 @@ export default function artist({ songs }) {
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
                 <h1>Artist: "{router.query.name}"</h1>
                 <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵"
-                       onChange={e => setFilteredSongs(songs?.filter(song => {
-                           return Object.values(song).some(value => {
-                           return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())})}))}/>
+                       onChange={e => { triggerLoader(router)
+                           setFilteredSongs(songs?.filter(song => { return Object.values(song).some(value => {
+                                   return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())})}))}}/>
 
                 <span className="text-xl w-full -mb-4">{oldest.year} - {newest.year}</span>
                 <span className="text-xl w-full -mb-4">{albums.length} Album<SOrNot arrayLength={albums.length}/></span>

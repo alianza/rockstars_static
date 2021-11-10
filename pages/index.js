@@ -3,6 +3,8 @@ import ArtistCard from "../components/artistCard/artistCard"
 import ScrollToTopButton from "../components/scrollToTopButton/scrollToTopButton"
 import React, { useState } from "react"
 import LoadMoreButton from "../components/loadMoreButton/loadMoreButton"
+import triggerLoader from "../lib/triggerLoader"
+import { useRouter } from "next/router"
 
 export async function getStaticProps() {
     let artists = await MusicService.getArtists()
@@ -20,6 +22,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({artists}) {
+    const router = useRouter()
     const [filteredArtists, setFilteredArtists] = useState(artists)
 
     return (
@@ -30,8 +33,10 @@ export default function Home({artists}) {
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredArtists([...filteredArtists]?.reverse())}>Sort ⇕</button>
                 </div>
                 <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search artists! 👨‍🎤"
-                       onChange={e => setFilteredArtists(artists?.filter(artist => { return Object.values(artist).some(value => {
-                           return value.toString().toLowerCase().includes(e.target.value.toLowerCase())})}))}/>
+                       onChange={e => { triggerLoader(router)
+                           setFilteredArtists(artists?.filter(artist => {
+                           return Object.values(artist).some(value => {
+                               return value.toString().toLowerCase().includes(e.target.value.toLowerCase())})}))}}/>
             </div>
 
             {filteredArtists?.length ? filteredArtists.map((artist, index) =>
