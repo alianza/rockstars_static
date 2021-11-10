@@ -38,7 +38,7 @@ module.exports = {
         'footer': 'var(--footer)',
       },
       transitionProperty: {
-        'spacing': 'margin, padding',
+        'spacing': 'width, margin, padding',
       },
       transitionTimingFunction: {
         'ease-in-out': 'ease-in-out',
