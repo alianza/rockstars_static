@@ -7,7 +7,12 @@ import SOrNot from "../../components/sOrNot"
 import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton"
 
 export async function getStaticProps({ params }) {
-    const songs = await MusicService.getSongsByGenreName(encodeURIComponent(params.name))
+    let songs = await MusicService.getSongsByGenreName(encodeURIComponent(params.name))
+
+    songs = songs.map(song => { // Trim unneeded properties from songs
+        const { bpm, duration, shortname, ...trimmedSongs } = song
+        return trimmedSongs
+    })
 
     return {
         props: {
@@ -42,24 +47,26 @@ export async function getStaticPaths() {
 
 export default function genre({ songs }) {
     const router = useRouter()
-    const [query, setQuery] = useState('')
-
-    const filteredSongs = songs?.filter(song => song.name.toLowerCase().includes(query))
+    const [filteredSongs, setFilteredSongs] = useState(songs)
 
     return (
         <div id="genre" className="flex flex-wrap justify-between gap-2">
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
-                <h1>Genre: "{router.query.name}"</h1>
+                <div className="flex items-center gap-4">
+                    <h1>Genre: "{router.query.name}"</h1>
+                    <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredSongs([...filteredSongs]?.reverse())}>Sort ⇕</button>
+                </div>
                 <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵"
-                       onChange={event => setQuery(event.target.value?.toLowerCase())}/>
+                       onChange={e => setFilteredSongs(songs?.filter(song => {
+                           return Object.values(song).some(value => {
+                               return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())})}))}/>
             </div>
             <div className="w-full">
                 <h2>{filteredSongs?.length} Song<SOrNot arrayLength={filteredSongs?.length} withColon /></h2>
             </div>
-            {filteredSongs.length ?
-                filteredSongs.map((song, index) =>
-                    <SongCard showArtist key={song.id} song={song} hidden={index >= 50}/>) :
-                <h3>No results...</h3>}
+            {filteredSongs?.length ? filteredSongs.map((song, index) =>
+                <SongCard showArtist key={song.id} song={song} hidden={index >= 50}/>
+            ) : <h3>No results...</h3>}
             {filteredSongs?.length > 50 && <ScrollToTopButton/>}
             {filteredSongs?.length > 50 && <LoadMoreButton fullWidth/>}
         </div>

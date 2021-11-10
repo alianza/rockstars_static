@@ -23,24 +23,23 @@ export async function getStaticProps() {
 }
 
 export default function Songs({songs}) {
-    const [query, setQuery] = useState('')
-
     songs = decompress(songs)
-
-    const filteredSongs = songs?.filter(song => song.name.toLowerCase().includes(query))
+    const [filteredSongs, setFilteredSongs] = useState(songs)
 
     return (
         <div id="songs" className="flex flex-wrap justify-between gap-2">
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
-                <h1>All Songs</h1>
+                <div className="flex items-center gap-4">
+                    <h1>All Songs</h1>
+                    <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredSongs([...filteredSongs]?.reverse())}>Sort ⇕</button>
+                </div>
                 <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵"
-                       onChange={event => setQuery(event.target.value?.toLowerCase())}/>
+                       onChange={e => setFilteredSongs(songs?.filter(song => song.name.toLowerCase().includes(e.target.value?.toLowerCase())))}/>
             </div>
 
-            {filteredSongs.length ?
-                filteredSongs.map((song, index) =>
-                    <SongCard showArtist showGenre key={`${song.name} ${song.artist}`} song={song} hidden={index >= 50}/>) :
-                <h3>No results...</h3>}
+            {filteredSongs.length ? filteredSongs.map((song, index) =>
+                <SongCard showArtist showGenre key={`${song.name} ${song.artist}`} song={song} hidden={index >= 50}/>
+            ) : <h3>No results...</h3>}
             {filteredSongs?.length >= 50 && <ScrollToTopButton/>}
             {filteredSongs?.length >= 50 && <LoadMoreButton fullWidth/>}
         </div>
