@@ -37,6 +37,7 @@ a, button.link {
   &.menu-active {
     & #header {
       margin-left: var(--menu);
+      width: calc(100% - var(--menu));
     }
 
     & #menu {
@@ -72,6 +73,12 @@ a, button.link {
         margin-left: 0;
       }
     }
+  }
+}
+
+@media (hover: none) {
+  a, button.link {
+    text-decoration-color: inherit;
   }
 }
 
