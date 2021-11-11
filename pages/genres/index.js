@@ -26,7 +26,7 @@ export default function Genres({ genres }) {
     function filterGenres(e) {
         triggerLoader(router)
         setFilteredGenres(genres?.filter(genre => {
-            return genre.toLowerCase().includes(e.target.value.toLowerCase())
+            return genre?.toLowerCase().includes(e.target.value?.toLowerCase())
         }))
     }
 

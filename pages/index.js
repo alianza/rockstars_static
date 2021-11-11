@@ -28,7 +28,7 @@ export default function Home({ artists }) {
     function filterArtists(e) {
         triggerLoader(router)
         setFilteredArtists(artists?.filter(artist => {
-            return artist.name.toLowerCase().includes(e.target.value.toLowerCase())
+            return artist?.name.toLowerCase().includes(e.target.value?.toLowerCase())
         }))
     }
 

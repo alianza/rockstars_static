@@ -33,7 +33,7 @@ export default function Songs({songs}) {
         triggerLoader(router)
         setFilteredSongs(songs?.filter(song => {
             return Object.values({...song, spotifyId: ''}).some(value => {
-                return value.toString().toLowerCase().includes(e.target.value.toLowerCase())
+                return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())
             })
         }))
     }
