@@ -22,7 +22,7 @@ export default function Menu(props) {
             <div onClick={e => props.onMenuClick(e)} className={styles.close}>✖</div>
             <h1 className="my-4">Menu</h1>
             <ul onClick={() => closeMenuIfMobile()}>
-                <li className={styles.item}><Link href="/"><a className={`${router.pathname === "/" ? styles.active : ""} ${styles.link}`}>Artists</a></Link></li>
+                <li className={styles.item}><Link href="/"><a className={`${router.pathname === "/" ? styles.active : ""} ${styles.link}`}>All Artists</a></Link></li>
                 <li className={styles.item}><Link href="/songs"><a className={`${router.pathname === "/songs" ? styles.active : ""} ${styles.link}`}>All Songs</a></Link></li>
                 <li className={styles.item}><Link href="/genres"><a className={`${router.pathname === "/genres" ? styles.active : ""} ${styles.link}`}>All Genres</a></Link></li>
                 <li className={styles.item} onClick={about}><button className={`${styles.link} link w-full text-left`}>About</button></li>
