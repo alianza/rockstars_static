@@ -14,7 +14,7 @@ export default function Header(props) {
                 </div>
                 <h1 className={styles.title}>{props.title}</h1>
             </div>
-            <a href="https://teamrockstars.nl/" className="transition-transform hover:scale-110 active:scale-100">
+            <a href="https://teamrockstars.nl/" className="transition-transform hover:scale-110 active:scale-100 my-auto">
                 <Image
                     src="/assets/logo.png"
                     alt="Team Rockstars IT Logo"
