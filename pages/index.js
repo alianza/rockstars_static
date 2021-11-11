@@ -25,6 +25,13 @@ export default function Home({ artists }) {
     const router = useRouter()
     const [filteredArtists, setFilteredArtists] = useState(artists)
 
+    function filterArtists(e) {
+        triggerLoader(router)
+        setFilteredArtists(artists?.filter(artist => {
+            return artist.name.toLowerCase().includes(e.target.value.toLowerCase())
+        }))
+    }
+
     return (
         <div id="artists" className="flex flex-wrap justify-between gap-y-2 gap-x-px">
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
@@ -32,9 +39,7 @@ export default function Home({ artists }) {
                     <h1>All Artists</h1>
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredArtists([...filteredArtists]?.reverse())}>Sort ⇕</button>
                 </div>
-                <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search artists! 👨‍🎤"
-                       onChange={e => { triggerLoader(router); setFilteredArtists(artists?.filter(artist => {
-                               return artist.name.toLowerCase().includes(e.target.value?.toLowerCase())}))}}/>
+                <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search artists! 👨‍🎤" onChange={e => filterArtists(e)}/>
             </div>
 
             {filteredArtists?.length ? filteredArtists.map((artist, index) =>

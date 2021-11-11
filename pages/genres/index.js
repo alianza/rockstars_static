@@ -23,6 +23,13 @@ export default function Genres({ genres }) {
     const router = useRouter()
     const [filteredGenres, setFilteredGenres] = useState(genres)
 
+    function filterGenres(e) {
+        triggerLoader(router)
+        setFilteredGenres(genres?.filter(genre => {
+            return genre.toLowerCase().includes(e.target.value.toLowerCase())
+        }))
+    }
+
     return (
         <div id="genres" className="flex flex-wrap justify-between gap-y-2 gap-x-px">
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
@@ -30,9 +37,7 @@ export default function Genres({ genres }) {
                     <h1>All Genres</h1>
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredGenres([...filteredGenres]?.reverse())}>Sort ⇕</button>
                 </div>
-                <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search genres! 🎵"
-                       onChange={e => { triggerLoader(router); setFilteredGenres(genres?.filter(genre => {
-                               return genre.toLowerCase().includes(e.target.value?.toLowerCase())}))}}/>
+                <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search genres! 🎵" onChange={e => filterGenres(e)}/>
             </div>
             <div className="w-full">
                 <h2>{filteredGenres.length} Genre{filteredGenres.length !== 1 && 's'}</h2>

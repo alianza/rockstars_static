@@ -42,17 +42,22 @@ export default function artist({ songs }) {
     const oldest = songs?.length ? songs?.reduce((a, b) => a.year < b.year ? a : b) : ''
     const newest = songs?.length ? songs?.reduce((a, b) => a.year > b.year ? a : b) : ''
 
+    const filterSongs = (e) => {
+        triggerLoader(router)
+        setFilteredSongs(songs?.filter(song => {
+            return Object.values({...song, spotifyId: ''}).some(value => {
+                return value.toString().toLowerCase().includes(e.target.value.toLowerCase())
+        })}))
+    }
+
     return (
         <div id="artist" className="flex flex-wrap justify-between gap-2">
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
                 <h1>Artist: "{router.query.name}"</h1>
-                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵"
-                       onChange={e => { triggerLoader(router); setFilteredSongs(songs?.filter(song => {
-                           return Object.values(song).some(value => { return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())})}))}}/>
-
+                <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => filterSongs(e)}/>
                 <span className="text-xl w-full -mb-4">{oldest.year} - {newest.year}</span>
                 <span className="text-xl w-full -mb-4">{albums.length} Album<SOrNot arrayLength={albums.length}/></span>
-                <h2 className="w-full -mb-4">{songs?.length} Song<SOrNot arrayLength={songs?.length} withColon /></h2>
+                <h2 className="w-full -mb-4">{filteredSongs?.length} Song<SOrNot arrayLength={filteredSongs?.length} withColon /></h2>
             </div>
             {filteredSongs?.length ? filteredSongs.map((song, index) =>
                 <SongCard key={song.id} song={song} showGenre hidden={index >= 50}/>

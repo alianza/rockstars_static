@@ -50,6 +50,14 @@ export default function genre({ songs }) {
     const router = useRouter()
     const [filteredSongs, setFilteredSongs] = useState(songs)
 
+    const filterSongs = (e) => {
+        triggerLoader(router)
+        setFilteredSongs(songs?.filter(song => {
+            return Object.values({...song, spotifyId: ''}).some(value => {
+                return value.toString().toLowerCase().includes(e.target.value.toLowerCase())
+        })}))
+    }
+
     return (
         <div id="genre" className="flex flex-wrap justify-between gap-2">
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
@@ -57,9 +65,7 @@ export default function genre({ songs }) {
                     <h1>Genre: "{router.query.name}"</h1>
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredSongs([...filteredSongs]?.reverse())}>Sort ⇕</button>
                 </div>
-                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵"
-                       onChange={e => { triggerLoader(router); setFilteredSongs(songs?.filter(song => {
-                           return Object.values(song).some(value => { return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())})}))}}/>
+                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => filterSongs(e)}/>
             </div>
             <div className="w-full">
                 <h2>{filteredSongs?.length} Song<SOrNot arrayLength={filteredSongs?.length} withColon /></h2>

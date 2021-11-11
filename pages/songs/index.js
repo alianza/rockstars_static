@@ -29,6 +29,15 @@ export default function Songs({songs}) {
     songs = decompress(songs)
     const [filteredSongs, setFilteredSongs] = useState(songs)
 
+    const filterSongs = (e) => {
+        triggerLoader(router)
+        setFilteredSongs(songs?.filter(song => {
+            return Object.values({...song, spotifyId: ''}).some(value => {
+                return value.toString().toLowerCase().includes(e.target.value.toLowerCase())
+            })
+        }))
+    }
+
     return (
         <div id="songs" className="flex flex-wrap justify-between gap-2">
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
@@ -36,9 +45,7 @@ export default function Songs({songs}) {
                     <h1>All Songs</h1>
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredSongs([...filteredSongs]?.reverse())}>Sort ⇕</button>
                 </div>
-                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵"
-                       onChange={e => { triggerLoader(router); setFilteredSongs(songs?.filter(song => {
-                           return Object.values(song).some(value => { return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())})}))}}/>
+                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => filterSongs(e)}/>
             </div>
 
             {filteredSongs.length ? filteredSongs.map((song, index) =>
