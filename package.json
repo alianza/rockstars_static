@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:server": "npm-run-all --parallel dev start-json-server",
     "build": "next build",
     "build-netlify": "npm-run-all --parallel --race build start-json-server-quietly",
     "start": "next start",
