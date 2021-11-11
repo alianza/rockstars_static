@@ -53,7 +53,7 @@ export default function genre({ songs }) {
     return (
         <div id="genre" className="flex flex-wrap justify-between gap-2">
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 w-full mobile:w-auto justify-between mobile:justify-start">
                     <h1>Genre: "{router.query.name}"</h1>
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredSongs([...filteredSongs]?.reverse())}>Sort ⇕</button>
                 </div>

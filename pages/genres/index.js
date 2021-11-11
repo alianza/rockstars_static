@@ -26,7 +26,7 @@ export default function Genres({ genres }) {
     return (
         <div id="genres" className="flex flex-wrap justify-between gap-y-2 gap-x-px">
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 w-full mobile:w-auto justify-between mobile:justify-start">
                     <h1>All Genres</h1>
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredGenres([...filteredGenres]?.reverse())}>Sort ⇕</button>
                 </div>

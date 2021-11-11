@@ -81,7 +81,7 @@ a, button.link {
   @import 'styles/tooltip';
 }
 
-@media only screen and (max-width: $mobile_size) {
+@media only screen and (max-width: $tablet_size) {
   #app {
     &.menu-active {
       & #content {
