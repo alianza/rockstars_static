@@ -1,24 +1,14 @@
 import PropTypes from "prop-types"
 
 LoadMoreButton.propTypes = {
+    loadMore: PropTypes.func.isRequired,
     fullWidth: PropTypes.bool,
-    amount: PropTypes.number
 }
 
-export default function LoadMoreButton(props) {
-    const selectors = '#artists a.hidden, #songs div.hidden, #genres a.hidden, #genre div.hidden'
-
-    const loadMore = () => {
-        document.querySelectorAll(selectors).forEach((e, i) => {
-            i < (props?.amount || 50) ? e.classList.remove('hidden') : ''
-        })
-
-        if (!document.querySelectorAll(selectors).length) { document.querySelector('#loadMore').remove() }
-    }
-
+export default function LoadMoreButton({loadMore, fullWidth}) {
     return (
-        <button id="loadMore" className={`button yellow shadow-3xl ${props.fullWidth ? 'w-full' : ''}`}
-                onClick={() => loadMore()}>
+        <button id="loadMore" className={`button yellow shadow-3xl ${fullWidth ? 'w-full' : ''}`}
+                onClick={e => loadMore(e)}>
             <strong className="text-xl">Load more...</strong>
         </button>
     )

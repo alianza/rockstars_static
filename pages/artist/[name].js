@@ -35,8 +35,10 @@ export async function getStaticPaths() {
 }
 
 export default function artist({ songs }) {
+    const pageSize = 25
     const router = useRouter()
     const [filteredSongs, setFilteredSongs] = useState(songs)
+    const [page, setPage] = useState(1)
 
     const albums = songs?.map(song => song.album).filter((album, index, self) => self.indexOf(album) === index)
     const oldest = songs?.length ? songs?.reduce((a, b) => a.year < b.year ? a : b) : ''
@@ -44,9 +46,10 @@ export default function artist({ songs }) {
 
     const filterSongs = (e) => {
         triggerLoader(router)
+        if (page !== 1) { setPage(1) }
         setFilteredSongs(songs?.filter(song => {
             return Object.values({...song, spotifyId: ''}).some(value => {
-                return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())
+                return value?.toString().toLowerCase().includes(e.target.value.toLowerCase())
         })}))
     }
 
@@ -57,13 +60,14 @@ export default function artist({ songs }) {
                 <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => filterSongs(e)}/>
                 <span className="text-xl w-full -mb-4">{oldest.year} - {newest.year}</span>
                 <span className="text-xl w-full -mb-4">{albums.length} Album<SOrNot arrayLength={albums.length}/></span>
-                <h2 className="w-full -mb-4">{filteredSongs?.length} Song<SOrNot arrayLength={filteredSongs?.length} withColon /></h2>
+                <h2 className="w-full -mb-4">{filteredSongs.length} Song<SOrNot arrayLength={filteredSongs.length} withColon /></h2>
             </div>
-            {filteredSongs?.length ? filteredSongs.map((song, index) =>
-                <SongCard key={song.id} song={song} showGenre hidden={index >= 50}/>
+            {filteredSongs.slice(0, page * pageSize).length ? filteredSongs.slice(0, page * pageSize).map(song =>
+                <SongCard key={song.id} song={song} showGenre/>
             ) : <h3>No results...</h3>}
-            {filteredSongs?.length > 50 && <ScrollToTopButton/>}
-            {filteredSongs?.length > 50 && <LoadMoreButton fullWidth/>}
+            {filteredSongs.length > 50 && <ScrollToTopButton/>}
+            {!(filteredSongs.slice(0, page * pageSize).length === filteredSongs.length) &&
+            <LoadMoreButton fullWidth loadMore={() => { triggerLoader(router); setPage(page + 1) }}/>}
         </div>
     )
 }

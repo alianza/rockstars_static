@@ -47,14 +47,17 @@ export async function getStaticPaths() {
 }
 
 export default function genre({ songs }) {
+    const pageSize = 50
     const router = useRouter()
     const [filteredSongs, setFilteredSongs] = useState(songs)
+    const [page, setPage] = useState(1)
 
     const filterSongs = (e) => {
         triggerLoader(router)
+        if (page !== 1) { setPage(1) }
         setFilteredSongs(songs?.filter(song => {
             return Object.values({...song, spotifyId: ''}).some(value => {
-                return value?.toString().toLowerCase().includes(e.target.value?.toLowerCase())
+                return value?.toString().toLowerCase().includes(e.target.value.toLowerCase())
         })}))
     }
 
@@ -70,11 +73,11 @@ export default function genre({ songs }) {
             <div className="w-full">
                 <h2>{filteredSongs?.length} Song<SOrNot arrayLength={filteredSongs?.length} withColon /></h2>
             </div>
-            {filteredSongs?.length ? filteredSongs.map((song, index) =>
-                <SongCard showArtist key={song.id} song={song} hidden={index >= 50}/>
+            {filteredSongs.slice(0, page * pageSize).length ? filteredSongs.slice(0, page * pageSize).map(song =>
+                <SongCard showArtist key={song.id} song={song}/>
             ) : <h3>No results...</h3>}
             {filteredSongs?.length > 50 && <ScrollToTopButton/>}
-            {filteredSongs?.length > 50 && <LoadMoreButton fullWidth/>}
-        </div>
+            {!(filteredSongs.slice(0, page * pageSize).length === filteredSongs.length) &&
+            <LoadMoreButton fullWidth loadMore={() => { triggerLoader(router); setPage(page + 1) }}/>}        </div>
     )
 }
