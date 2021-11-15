@@ -5,7 +5,7 @@
     "dev": "next dev",
     "dev:server": "npm-run-all --parallel dev start-json-server",
     "build": "next build",
-    "build-netlify": "npm-run-all --parallel --race build start-json-server-quietly",
+    "build-headless": "npm-run-all --parallel --race build start-json-server-quietly",
     "start": "next start",
     "start-json-server": "json-server --watch json-server/db.json --port 3001",
     "start-json-server-quietly": "json-server --watch json-server/db.json --port 3001 --quiet",
