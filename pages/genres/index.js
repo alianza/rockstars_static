@@ -27,7 +27,7 @@ export default function Genres({ genres }) {
 
     function filterGenres(e) {
         triggerLoader(router)
-        if (page !== 1) { setPage(1) }
+        setPage(1)
         setFilteredGenres(genres?.filter(genre => {
             return genre.toLowerCase().includes(e.target.value.toLowerCase())
         }))

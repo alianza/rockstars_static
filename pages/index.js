@@ -29,7 +29,7 @@ export default function Home({ artists }) {
 
     function filterArtists(e) {
         triggerLoader(router)
-        if (page !== 1) { setPage(1) }
+        setPage(1)
         setFilteredArtists(artists.filter(artist => {
             return artist.name.toLowerCase().includes(e.target.value.toLowerCase())
         }))
