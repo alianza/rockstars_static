@@ -13,7 +13,6 @@ jobs:
           build: yarn run build-headless
           start: yarn run start
           browser: chrome
-          record: true
           spec: cypress/integration/tests/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN_GITHUB }} # pass GitHub token to allow accurately detecting a build vs a re-run build
