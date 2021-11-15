@@ -19,6 +19,7 @@ export default function About() {
             < br/>
             <h2>Read more!</h2>
             Read more about this and other projects on my personal portfolio website at <a href="https://www.jwvbremen.nl/rockstars" target="_blank" rel="noreferrer">jwvbremen.nl</a>.
+            Check out the source code on <a href="https://www.github.com/alianza/rockstars_static" target="_blank" rel="noreferrer">GitHub</a>.
             <style jsx>{`
                     #about a {
                         font-weight: bold;
