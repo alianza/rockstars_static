@@ -8,10 +8,13 @@
     "build-netlify": "npm-run-all --parallel --race build start-json-server-quietly",
     "start": "next start",
     "start-json-server": "json-server --watch json-server/db.json --port 3001",
-    "start-json-server-quietly": "json-server --watch json-server/db.json --port 3001 --quiet"
+    "start-json-server-quietly": "json-server --watch json-server/db.json --port 3001 --quiet",
+    "cypress-test": "cypress run --browser chrome --spec cypress/integration/tests/**/*",
+    "cypress-open": "cypress open"
   },
   "dependencies": {
     "compress-json": "^2.0.1",
+    "cypress": "^9.0.0",
     "next": "latest",
     "next-pwa": "^5.4.0",
     "nextjs-progressbar": "^0.0.13",
@@ -23,6 +26,7 @@
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
+    "@testing-library/cypress": "^8.0.1",
     "autoprefixer": "^10.2.6",
     "json-server": "^0.17.0",
     "npm-run-all": "^4.1.5",
