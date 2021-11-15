@@ -22,6 +22,6 @@ describe('The Artists page', () => {
 
         cy.findByText('5 Songs:').should('exist')
 
-        cy.get('#artist').find('> #songCard').should('have.length', 5)
+        cy.get('#artist').find('> div.relative.bg-secondary').should('have.length', 5)
     })
 })

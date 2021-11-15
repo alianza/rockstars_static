@@ -4,7 +4,7 @@ describe('The Main page', () => {
     })
 
     it('shows title', () => { // Asserts that base url loads successfully
-        cy.findByText('All Artists').should('exist')
+        cy.findAllByText('All Artists').should('have.length', 2)
     })
 
     it('successfully loads', () => { // Asserts that base url loads successfully
