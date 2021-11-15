@@ -4,17 +4,16 @@ jobs:
   lighthouse_CI:
     runs-on: ubuntu-latest
     steps:
-
-      - name: Waiting for Vercel deployment
-        uses: mskelton/wait-for-vercel-action@v1
+      - name: Await for Vercel deployment
+        uses: UnlyEd/github-action-await-vercel@v1.1.2
         id: wait-for-vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
-          prod-url: https://rockstars-static.vercel.app/
-          token: ${{secrets.VERCEL_TOKEN}}
-          await-build: true
-          timeout: 360
-      - name: Echo preview url
-        run: echo ${{ steps.wait-for-vercel.outputs.url }}
+          deployment-url: https://rockstars-static.vercel.app/
+          
+      - name: Displays the deployment name
+        run: "echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}"
 
       - uses: actions/checkout@v2
 
