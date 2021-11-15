@@ -13,8 +13,8 @@ jobs:
           deployment-url: rockstars-static.vercel.app
           timeout: 360
 
-      - name: Displays the deployment name
-        run: "echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}"
+      - name: Display deployment status
+        run: echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}
 
       - uses: actions/checkout@v2
 
