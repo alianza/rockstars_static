@@ -3,7 +3,7 @@ import SongCard from "../../components/songCard/songCard"
 import React, { useState } from "react"
 import { useRouter } from "next/router"
 import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton"
-import SOrNot from "../../components/sOrNot"
+import SOrNot from "../../lib/sOrNot"
 import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton"
 import triggerLoader from "../../lib/triggerLoader"
 
