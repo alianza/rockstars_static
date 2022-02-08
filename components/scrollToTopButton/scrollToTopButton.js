@@ -1,5 +1,6 @@
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward"
 import React, { useEffect, useState } from "react"
+import styles from "./scrollToTopButton.module.scss"
 
 export default function ScrollToTopButton() {
     const [showButton, setShowButton] = useState(false)
@@ -19,13 +20,13 @@ export default function ScrollToTopButton() {
 
     const scrollToTop = () => {
         requestAnimationFrame((() => {
-                window.scrollTo({top: 0, behavior: 'smooth'})
+                window.scrollTo({ top: 0, behavior: 'smooth' })
             })
         )
     }
 
     return (
-        <button className={`button inverted${showButton ? '' : ' hidden'} fixed top-16 scale-90 mobile:scale-x-100 left-0 mobile:left-[initial] mobile:right-4 z-[5] shadow-3xl`} aria-label="Back to the top" onClick={scrollToTop}>
+        <button className={`button inverted ${styles.scrollToTopButton} ${showButton ? '' : ' hidden'}`} aria-label="Back to top" onClick={scrollToTop}>
             <ArrowUpwardIcon/>
         </button>
     )
