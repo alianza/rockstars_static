@@ -6,6 +6,7 @@ import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopBut
 import SOrNot from "../../lib/sOrNot"
 import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton"
 import triggerLoader from "../../lib/triggerLoader"
+import filterSongs from "../../lib/filterSongs"
 
 export async function getStaticProps({ params }) {
     let songs = await MusicService.getSongsByGenreName(encodeURIComponent(params.name))
@@ -52,13 +53,10 @@ export default function genre({ songs }) {
     const [filteredSongs, setFilteredSongs] = useState(songs)
     const [page, setPage] = useState(1)
 
-    const filterSongs = (e) => {
+    const handleFilterChange = (e) => {
         triggerLoader(router)
         setPage(1)
-        setFilteredSongs(songs?.filter(song => {
-            return Object.values({...song, spotifyId: ''}).some(value => {
-                return value?.toString().toLowerCase().includes(e.target.value.toLowerCase())
-        })}))
+        setFilteredSongs(filterSongs(songs, e.target.value))
     }
 
     return (
@@ -68,7 +66,7 @@ export default function genre({ songs }) {
                     <h1>Genre: "{router.query.name}"</h1>
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredSongs([...filteredSongs]?.reverse())}>Sort ⇕</button>
                 </div>
-                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => filterSongs(e)}/>
+                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => handleFilterChange(e)}/>
             </div>
             <div className="w-full">
                 <h2>{filteredSongs?.length} Song<SOrNot arrayLength={filteredSongs?.length} withColon /></h2>

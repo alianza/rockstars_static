@@ -6,6 +6,7 @@ import SOrNot from "../../lib/sOrNot"
 import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopButton"
 import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton"
 import triggerLoader from "../../lib/triggerLoader"
+import filterSongs from "../../lib/filterSongs"
 
 export async function getStaticProps({ params }) {
     const songs = await MusicService.getSongsByArtistName(encodeURIComponent(params.name))
@@ -41,24 +42,21 @@ export default function artist({ songs }) {
     const [page, setPage] = useState(1)
 
     const albums = songs?.map(song => song.album).filter((album, index, self) => self.indexOf(album) === index)
-    const oldest = songs?.length ? songs?.reduce((a, b) => a.year < b.year ? a : b) : ''
-    const newest = songs?.length ? songs?.reduce((a, b) => a.year > b.year ? a : b) : ''
+    const oldestSong = songs?.length ? songs?.reduce((a, b) => a.year < b.year ? a : b) : ''
+    const newestSong = songs?.length ? songs?.reduce((a, b) => a.year > b.year ? a : b) : ''
 
-    const filterSongs = (e) => {
+    const handleFilterChange = (e) => {
         triggerLoader(router)
         setPage(1)
-        setFilteredSongs(songs?.filter(song => {
-            return Object.values({...song, spotifyId: ''}).some(value => {
-                return value?.toString().toLowerCase().includes(e.target.value.toLowerCase())
-        })}))
+        setFilteredSongs(filterSongs(songs, e.target.value))
     }
 
     return (
         <div id="artist" className="flex flex-wrap justify-between gap-2">
             <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
                 <h1>Artist: "{router.query.name}"</h1>
-                <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => filterSongs(e)}/>
-                <span className="text-xl w-full -mb-4">{oldest.year} - {newest.year}</span>
+                <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => handleFilterChange(e)}/>
+                <span className="text-xl w-full -mb-4">{oldestSong.year} - {newestSong.year}</span>
                 <span className="text-xl w-full -mb-4">{albums.length} Album<SOrNot arrayLength={albums.length}/></span>
                 <h2 className="w-full -mb-4">{filteredSongs.length} Song<SOrNot arrayLength={filteredSongs.length} withColon /></h2>
             </div>

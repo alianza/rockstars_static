@@ -6,6 +6,7 @@ import { compress, decompress } from 'compress-json'
 import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton.js"
 import triggerLoader from "../../lib/triggerLoader"
 import { useRouter } from "next/router"
+import filterSongs from "../../lib/filterSongs"
 
 export async function getStaticProps() {
     let songs = await MusicService.getSongs()
@@ -31,14 +32,10 @@ export default function Songs({songs}) {
     const [filteredSongs, setFilteredSongs] = useState(songs)
     const [page, setPage] = useState(1)
 
-    const filterSongs = (e) => {
+    const handleFilterChange = (e) => {
         triggerLoader(router)
         setPage(1)
-        setFilteredSongs(songs?.filter(song => {
-            return Object.values({...song, spotifyId: ''}).some(value => {
-                return value?.toString().toLowerCase().includes(e.target.value.toLowerCase())
-            })
-        }))
+        setFilteredSongs(filterSongs(songs, e.target.value))
     }
 
     return (
@@ -48,7 +45,7 @@ export default function Songs({songs}) {
                     <h1>All Songs</h1>
                     <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredSongs([...filteredSongs].reverse())}>Sort ⇕</button>
                 </div>
-                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => filterSongs(e)}/>
+                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => handleFilterChange(e)}/>
             </div>
 
             {filteredSongs.slice(0, page * pageSize).length ? filteredSongs.slice(0, page * pageSize).map(song =>
