@@ -1,7 +1,5 @@
 module.exports = {
-  mode: 'jit',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -48,11 +46,6 @@ module.exports = {
         'header': 'var(--header)',
         'footer': 'var(--footer)',
       }
-    },
-  },
-  variants: {
-    extend: {
-      width: ['last'],
     },
   },
   plugins: [],
