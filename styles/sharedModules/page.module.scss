@@ -17,5 +17,9 @@
         .searchButton {
             @apply p-2 text-rockstar-grey w-full mobile:w-auto;
         }
+
+        .fullWidthPar {
+            @apply w-full -mb-4;
+        }
     }
 }
