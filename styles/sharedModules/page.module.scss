@@ -1,0 +1,21 @@
+.page {
+    @apply flex flex-wrap justify-between gap-y-2 gap-x-px;
+
+    .header {
+        @apply flex flex-wrap justify-between gap-4 mb-4 w-full;
+
+        .headerContainer {
+            @apply flex items-center gap-4 w-full mobile:w-auto justify-between mobile:justify-start;
+
+            .sortButton {
+                @apply shadow-3xl;
+                padding: 0.5rem !important;
+                width: auto !important;
+            }
+        }
+
+        .searchButton {
+            @apply p-2 text-rockstar-grey w-full mobile:w-auto;
+        }
+    }
+}
