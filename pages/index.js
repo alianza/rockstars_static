@@ -5,6 +5,8 @@ import React, { useState } from "react"
 import LoadMoreButton from "../components/loadMoreButton/loadMoreButton"
 import triggerLoader from "../lib/triggerLoader"
 import { useRouter } from "next/router"
+import PageHeader from "../components/pageHeader/pageHeader"
+import styles from "../styles/sharedModules/page.module.scss"
 
 export async function getStaticProps() {
     let artists = await MusicService.getArtists()
@@ -26,31 +28,27 @@ export default function Home({ artists }) {
     const router = useRouter()
     const [filteredArtists, setFilteredArtists] = useState(artists)
     const [page, setPage] = useState(1)
+    const pagedFilteredArtists = filteredArtists.slice(0, page * pageSize)
 
-    function filterArtists(e) {
+    function handleFilterChange(e) {
         triggerLoader(router)
         setPage(1)
-        setFilteredArtists(artists.filter(artist => {
-            return artist.name.toLowerCase().includes(e.target.value.toLowerCase())
-        }))
+        setFilteredArtists(artists.filter(artist => artist.name.toLowerCase().includes(e.target.value.toLowerCase())))
     }
 
     return (
-        <div id="artists" className="flex flex-wrap justify-between gap-y-2 gap-x-px">
-            <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
-                <div className="flex items-center gap-4 w-full mobile:w-auto justify-between mobile:justify-start">
-                    <h1>All Artists</h1>
-                    <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredArtists([...filteredArtists].reverse())}>Sort ⇕</button>
-                </div>
-                <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search artists! 👨‍🎤" onChange={e => filterArtists(e)}/>
-            </div>
-
-            {filteredArtists.slice(0, page * pageSize).length ? filteredArtists.slice(0, page * pageSize).map(artist =>
-                <ArtistCard key={artist.name} artist={artist}/>
-            ) : <h3>No results...</h3>}
+        <div id="artists" className={styles.page}>
+            <PageHeader
+              title="All Artists"
+              searchPlaceholder="Search artists! 👨‍🎤"
+              onSortButtonClick={() => setFilteredArtists([...filteredArtists].reverse())}
+              onSearchValueChange={e => handleFilterChange(e)}
+            />
+            {pagedFilteredArtists.length ? pagedFilteredArtists.map(artist =>
+              <ArtistCard key={artist.name} artist={artist}/>) : <h3>No results...</h3>}
             {filteredArtists.length >= 50 && <ScrollToTopButton/>}
-            {!(filteredArtists.slice(0, page * pageSize).length === filteredArtists.length) &&
-            <LoadMoreButton loadMore={() => { triggerLoader(router); setPage(page + 1) }}/>}
+            {!(pagedFilteredArtists.length === filteredArtists.length) &&
+              <LoadMoreButton loadMore={() => {triggerLoader(router);setPage(page + 1)}}/>}
         </div>
     )
 }

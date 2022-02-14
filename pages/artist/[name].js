@@ -7,6 +7,7 @@ import ScrollToTopButton from "../../components/scrollToTopButton/scrollToTopBut
 import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton"
 import triggerLoader from "../../lib/triggerLoader"
 import filterSongs from "../../lib/filterSongs"
+import styles from "../../styles/sharedModules/page.module.scss"
 
 export async function getStaticProps({ params }) {
     const songs = await MusicService.getSongsByArtistName(encodeURIComponent(params.name))
@@ -40,6 +41,7 @@ export default function artist({ songs }) {
     const router = useRouter()
     const [filteredSongs, setFilteredSongs] = useState(songs)
     const [page, setPage] = useState(1)
+    const filteredPagedSongs = filteredSongs.slice(0, page * pageSize)
 
     const albums = songs?.map(song => song.album).filter((album, index, self) => self.indexOf(album) === index)
     const oldestSong = songs?.length ? songs?.reduce((a, b) => a.year < b.year ? a : b) : ''
@@ -52,19 +54,18 @@ export default function artist({ songs }) {
     }
 
     return (
-        <div id="artist" className="flex flex-wrap justify-between gap-2">
-            <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
+        <div id="artist" className={styles.page}>
+            <div className={styles.header}>
                 <h1>Artist: "{router.query.name}"</h1>
-                <input className="p-2 text-rockstar-grey w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => handleFilterChange(e)}/>
-                <span className="text-xl w-full -mb-4">{oldestSong.year} - {newestSong.year}</span>
-                <span className="text-xl w-full -mb-4">{albums.length} Album<SOrNot arrayLength={albums.length}/></span>
-                <h2 className="w-full -mb-4">{filteredSongs.length} Song<SOrNot arrayLength={filteredSongs.length} withColon /></h2>
+                <input className={styles.searchButton} placeholder="Search songs! 🎵" onChange={e => handleFilterChange(e)}/>
+                <span className={`text-xl ${styles.fullWidthPar}`}>{oldestSong.year} - {newestSong.year}</span>
+                <span className={`text-xl ${styles.fullWidthPar}`}>{albums.length} Album<SOrNot arrayLength={albums.length}/></span>
+                <h2 className={styles.fullWidthPar}>{filteredSongs.length} Song<SOrNot arrayLength={filteredSongs.length} withColon /></h2>
             </div>
-            {filteredSongs.slice(0, page * pageSize).length ? filteredSongs.slice(0, page * pageSize).map(song =>
-                <SongCard key={song.id} song={song} showGenre/>
-            ) : <h3>No results...</h3>}
+            {filteredPagedSongs.length ? filteredPagedSongs.map(song =>
+              <SongCard key={song.id} song={song} showGenre/>) : <h3>No results...</h3>}
             {filteredSongs.length > 50 && <ScrollToTopButton/>}
-            {!(filteredSongs.slice(0, page * pageSize).length === filteredSongs.length) &&
+            {!(filteredPagedSongs.length === filteredSongs.length) &&
             <LoadMoreButton fullWidth loadMore={() => { triggerLoader(router); setPage(page + 1) }}/>}
         </div>
     )

@@ -7,6 +7,8 @@ import LoadMoreButton from "../../components/loadMoreButton/loadMoreButton.js"
 import triggerLoader from "../../lib/triggerLoader"
 import { useRouter } from "next/router"
 import filterSongs from "../../lib/filterSongs"
+import PageHeader from "../../components/pageHeader/pageHeader"
+import styles from "../../styles/sharedModules/page.module.scss"
 
 export async function getStaticProps() {
     let songs = await MusicService.getSongs()
@@ -31,6 +33,7 @@ export default function Songs({songs}) {
     songs = decompress(songs)
     const [filteredSongs, setFilteredSongs] = useState(songs)
     const [page, setPage] = useState(1)
+    const filteredPagedSongs = filteredSongs.slice(0, page * pageSize)
 
     const handleFilterChange = (e) => {
         triggerLoader(router)
@@ -39,20 +42,17 @@ export default function Songs({songs}) {
     }
 
     return (
-        <div id="songs" className="flex flex-wrap justify-between gap-2">
-            <div className="flex justify-between flex-wrap gap-4 mb-4 w-full">
-                <div className="flex items-center gap-4 w-full mobile:w-auto justify-between mobile:justify-start">
-                    <h1>All Songs</h1>
-                    <button className="button !p-2 shadow-3xl !w-auto" onClick={() => setFilteredSongs([...filteredSongs].reverse())}>Sort ⇕</button>
-                </div>
-                <input className="p-2 text-rockstar-grey  w-full mobile:w-auto" placeholder="Search songs! 🎵" onChange={e => handleFilterChange(e)}/>
-            </div>
-
-            {filteredSongs.slice(0, page * pageSize).length ? filteredSongs.slice(0, page * pageSize).map(song =>
-                <SongCard showArtist showGenre key={`${song.name} ${song.artist}`} song={song}/>
-            ) : <h3>No results...</h3>}
+        <div id="songs" className={styles.page}>
+            <PageHeader
+              title={'All Songs '}
+              searchPlaceholder={'Search songs! 🎵'}
+              onSortButtonClick={() => setFilteredSongs([...filteredSongs].reverse())}
+              onSearchValueChange={e => handleFilterChange(e)}
+            />
+            {filteredPagedSongs.length ? filteredPagedSongs.map(song =>
+              <SongCard showArtist showGenre key={`${song.name} ${song.artist}`} song={song}/>) : <h3>No results...</h3>}
             {filteredSongs.length >= 50 && <ScrollToTopButton/>}
-            {!(filteredSongs.slice(0, page * pageSize).length === filteredSongs.length) &&
+            {!(filteredPagedSongs.length === filteredSongs.length) &&
             <LoadMoreButton fullWidth loadMore={() => { triggerLoader(router); setPage(page + 1) }}/>}
         </div>
     )
