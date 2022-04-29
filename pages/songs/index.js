@@ -41,6 +41,11 @@ export default function Songs({songs}) {
         setFilteredSongs(filterSongs(songs, e.target.value))
     }
 
+    const loadMore = () => {
+        triggerLoader(router)
+        setPage(page + 1)
+    }
+
     return (
         <div id="songs" className={styles.page}>
             <PageHeader
@@ -50,10 +55,11 @@ export default function Songs({songs}) {
               onSearchValueChange={e => handleFilterChange(e)}
             />
             {filteredPagedSongs.length ? filteredPagedSongs.map(song =>
-              <SongCard showArtist showGenre key={`${song.name} ${song.artist}`} song={song}/>) : <h3>No results...</h3>}
+              <SongCard showArtist showGenre key={`${song.name} ${song.artist}`} song={song}/>) :
+              <h3>No results...</h3>}
             {filteredSongs.length >= 50 && <ScrollToTopButton/>}
             {!(filteredPagedSongs.length === filteredSongs.length) &&
-            <LoadMoreButton fullWidth loadMore={() => { triggerLoader(router); setPage(page + 1) }}/>}
+            <LoadMoreButton fullWidth loadMore={loadMore}/>}
         </div>
     )
 }

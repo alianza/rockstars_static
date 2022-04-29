@@ -62,6 +62,11 @@ export default function genre({ songs }) {
         setFilteredSongs(filterSongs(songs, e.target.value))
     }
 
+    const loadMore = () => {
+        triggerLoader(router)
+        setPage(page + 1)
+    }
+
     return (
         <div id="genre" className={styles.page}>
             <PageHeader
@@ -73,11 +78,13 @@ export default function genre({ songs }) {
             <div className="w-full">
                 <h2>{filteredSongs?.length} Song<SOrNot arrayLength={filteredSongs?.length} withColon /></h2>
             </div>
-            {pagedFilteredSongs.length ? pagedFilteredSongs.map(song =>
-              <SongCard showArtist key={song.id} song={song}/>) : <h3>No results...</h3>}
+            {pagedFilteredSongs.length ?
+              pagedFilteredSongs.map(song =>
+              <SongCard showArtist key={song.id} song={song}/>) :
+              <h3>No results...</h3>}
             {filteredSongs?.length > 50 && <ScrollToTopButton/>}
             {!(pagedFilteredSongs.length === filteredSongs.length) &&
-            <LoadMoreButton fullWidth loadMore={() => { triggerLoader(router); setPage(page + 1) }}/>}
+            <LoadMoreButton fullWidth loadMore={loadMore}/>}
         </div>
     )
 }

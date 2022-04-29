@@ -36,6 +36,11 @@ export default function Home({ artists }) {
         setFilteredArtists(artists.filter(artist => artist.name.toLowerCase().includes(e.target.value.toLowerCase())))
     }
 
+    const loadMore = () => {
+        triggerLoader(router)
+        setPage(page + 1)
+    }
+
     return (
         <div id="artists" className={styles.page}>
             <PageHeader
@@ -45,10 +50,11 @@ export default function Home({ artists }) {
               onSearchValueChange={e => handleFilterChange(e)}
             />
             {pagedFilteredArtists.length ? pagedFilteredArtists.map(artist =>
-              <ArtistCard key={artist.name} artist={artist}/>) : <h3>No results...</h3>}
+              <ArtistCard key={artist.name} artist={artist}/>) :
+              <h3>No results...</h3>}
             {filteredArtists.length >= 50 && <ScrollToTopButton/>}
             {!(pagedFilteredArtists.length === filteredArtists.length) &&
-              <LoadMoreButton loadMore={() => {triggerLoader(router);setPage(page + 1)}}/>}
+              <LoadMoreButton loadMore={loadMore}/>}
         </div>
     )
 }

@@ -53,6 +53,12 @@ export default function artist({ songs }) {
         setFilteredSongs(filterSongs(songs, e.target.value))
     }
 
+    const loadMore = () => {
+        triggerLoader(router)
+        setPage(page + 1)
+        console.log('loadmore')
+    }
+
     return (
         <div id="artist" className={styles.page}>
             <div className={styles.header}>
@@ -63,10 +69,11 @@ export default function artist({ songs }) {
                 <h2 className={styles.fullWidthPar}>{filteredSongs.length} Song<SOrNot arrayLength={filteredSongs.length} withColon /></h2>
             </div>
             {filteredPagedSongs.length ? filteredPagedSongs.map(song =>
-              <SongCard key={song.id} song={song} showGenre/>) : <h3>No results...</h3>}
+              <SongCard key={song.id} song={song} showGenre/>) :
+              <h3>No results...</h3>}
             {filteredSongs.length > 50 && <ScrollToTopButton/>}
             {!(filteredPagedSongs.length === filteredSongs.length) &&
-            <LoadMoreButton fullWidth loadMore={() => { triggerLoader(router); setPage(page + 1) }}/>}
+            <LoadMoreButton fullWidth loadMore={loadMore}/>}
         </div>
     )
 }
